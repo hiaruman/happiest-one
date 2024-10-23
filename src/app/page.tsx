@@ -1,5 +1,5 @@
 import Image from "next/image";
-import theHappiestOne from "@/assets/svg/the-happiest-one.svg";
+import theHappiestOne from "@/assets/svg/the-happiest-one-white.svg";
 
 export default function Home() {
   return (

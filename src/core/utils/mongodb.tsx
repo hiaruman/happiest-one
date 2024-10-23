@@ -1,33 +1,24 @@
-// import mongoose from 'mongoose';
-//
-// const MONGODB_URI = process.env.MONGODB_URI;
-//
-// if (!MONGODB_URI) {
-//     throw new Error('Please define the MONGODB_URI environment variable in .env.local');
-// }
-//
-// let cached = global.mongoose;
-//
-// if (!cached) {
-//     cached = global.mongoose = { conn: null, promise: null };
-// }
-//
-// async function dbConnect() {
-//     if (cached.conn) {
-//         return cached.conn;
-//     }
-//
-//     if (!cached.promise) {
-//         const opts = {
-//             bufferCommands: false,
-//         };
-//
-//         cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongoose) => {
-//             return mongoose;
-//         });
-//     }
-//     cached.conn = await cached.promise;
-//     return cached.conn;
-// }
-//
-// export default dbConnect;
+import mongoose from 'mongoose';
+import env from '@/core/constant/env'
+
+let isConnected = false; // Track connection status
+
+export async function connectToDatabase() {
+    if (isConnected) {
+        console.log('MongoDB is already connected');
+        return;
+    }
+
+    try {
+        const db = await mongoose.connect(env.mongodb_uri, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+        });
+
+        isConnected = db.connections[0].readyState === 1;
+        console.log('MongoDB connected');
+    } catch (error) {
+        console.error('MongoDB connection failed:', error);
+        throw error;
+    }
+}
