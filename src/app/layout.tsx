@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-// import favicon from "@/assets/svg/the-happiest-one.svg";
 import "./globals.css";
 
 const geistSans = localFont({
