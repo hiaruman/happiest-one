@@ -11,9 +11,6 @@ const nextConfig = {
                     name: '[name].[hash].[ext]',
                     esModule: false,
                 },
-            },
-            options: {
-                emitWarning: false // this will silence warnings
             }
         });
 

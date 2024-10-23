@@ -10,10 +10,7 @@ export async function connectToDatabase() {
     }
 
     try {
-        const db = await mongoose.connect(env.mongodb_uri, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-        });
+        const db = await mongoose.connect(env.mongodb_uri);
 
         isConnected = db.connections[0].readyState === 1;
         console.log('MongoDB connected');

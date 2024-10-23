@@ -13,10 +13,10 @@ export default async function handler(req: any, res: any) {
 
         if (req.method==='GET') {
 
-            let  {isActive, name} = req.query;
+            const  {isActive, name} = req.query;
             const attendance = await Attendance.findOne((isActive || isActive==false) ? {isActive, name: { $regex: new RegExp(name, 'i') }} : {name:{ $regex: new RegExp(name, 'i') }});
 
-            let response = {
+            const response = {
                 code: attendance ? 200 : 404,
                 message:attendance ? 'success' : 'data not found',
                 data: attendance ? attendance : undefined

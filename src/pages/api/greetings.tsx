@@ -13,7 +13,7 @@ export default async function handler(req: any, res: any) {
         // Query atau operasi lainnya di MongoDB
         const greetings = await Greetings.find({isActive:true});
 
-        let response = {
+        const response = {
             code: 200,
             message: 'success',
             data: greetings ? greetings : []
