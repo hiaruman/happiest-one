@@ -12,6 +12,9 @@ const nextConfig = {
                     esModule: false,
                 },
             },
+            options: {
+                emitWarning: false // this will silence warnings
+            }
         });
 
         return config;
