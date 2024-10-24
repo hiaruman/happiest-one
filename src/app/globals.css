@@ -40,6 +40,6 @@ body {
   }
 
   .mobile {
-    @apply w-full max-w-[480px] h-full absolute right-1/2 translate-x-1/2 min-[968px]:right-0 min-[968px]:translate-x-0;
+    @apply w-full max-w-[480px] h-full overflow-auto absolute right-1/2 translate-x-1/2 min-[968px]:right-0 min-[968px]:translate-x-0;
   }
 }
