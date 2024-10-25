@@ -5,6 +5,7 @@ import React, {useEffect, useRef, useState} from "react";
 import iconVercel from "@/assets/svg/vercel.svg";
 import iconMongoDB from "@/assets/svg/mongodb.svg";
 import iconNextJS from "@/assets/svg/nextjs.svg";
+import iconUp from "@/assets/svg/arrow-up.svg";
 
 const InvitePage = () => {
     const title: string = "The Happiest One - Osa & Yosi";
@@ -132,6 +133,10 @@ const InvitePage = () => {
             setPresence(tempStore[0].value);
         }
     }
+
+    const handleSubmitMessage = (e : any) => {
+        e.preventDefault();
+    }
     return (
         <>
             <Head>
@@ -139,7 +144,7 @@ const InvitePage = () => {
             </Head>
             <div className={`w-full h-full flex text-xs md:text-sm`}>
                 <div className={`desktop-foreground`}>Ini Tidak Terlihat</div>
-                <div className={`mobile bg-[#071b54]`}>
+                <div className={`mobile bg-[#000000]`}>
 
 
                     <div>
@@ -180,34 +185,84 @@ const InvitePage = () => {
                             </a>
                     </div>
 
-                    <div className={`p-6 flex flex-col items-center gap-2`}>
-                        <div className={`text-2xl`}>RSVP</div>
-                        <div className={`w-full`}>
-                            <select
-                                className={`w-full p-2.5 rounded-lg appearance-none text-center uppercase ${selectedPresence.value === presences[1].value ? 'bg-amber-500 text-white' : (selectedPresence.value === presences[2].value ? 'bg-red-700 text-white' : (selectedPresence.value === presences[3].value ? 'bg-green-700 text-white' : 'bg-slate-300 text-slate-600'))}`}
-                                value={selectedPresence.value}
-                                onChange={(e) => {
-                                    const selected = JSON.parse(JSON.stringify(presences.find(p => p.value === e.target.value)));
-                                    setSelectedPresence(selected); // Update the selected presence
-                                handleOnChange(e)
-                            }}>
-                                {presences.map((p) => (
-                                    <option key={p.value} value={p.value}>{p.label}</option>
-                                ))}
-                            </select>
+                    {/*    RSVP    */}
+                    <section>
+                        <div className={`p-6 flex flex-col items-center gap-2`}>
+                            <div className={`text-2xl`}>RSVP</div>
+                            <div className={`w-full`}>
+                                <select
+                                    className={`w-full p-2.5 rounded-lg appearance-none text-center ${selectedPresence.value === presences[1].value ? 'bg-gold text-chiblack' : (selectedPresence.value === presences[2].value ? 'bg-red-700 text-white' : (selectedPresence.value === presences[3].value ? 'bg-green-700 text-white' : 'bg-slate-300 text-slate-600'))}`}
+                                    value={selectedPresence.value}
+                                    onChange={(e) => {
+                                        const selected = JSON.parse(JSON.stringify(presences.find(p => p.value === e.target.value)));
+                                        setSelectedPresence(selected); // Update the selected presence
+                                    handleOnChange(e)
+                                }}>
+                                    {presences.map((p) => (
+                                        <option key={p.value} value={p.value}>{p.label}</option>
+                                    ))}
+                                </select>
+                            </div>
+                            <div className={`w-full`}>
+                                <form onSubmit={handleSubmit}>
+                                    <button type={`submit`}
+                                            className={`rounded-lg bg-gold text-chiblack py-2 w-full hover:bg-amber-500`}>Konfirmasi
+                                    </button>
+                                </form>
+                            </div>
                         </div>
-                        <div className={`w-full`}>
-                            <form onSubmit={handleSubmit}>
-                                <button type={`submit`}
-                                        className={`rounded-lg bg-white text-slate-800 py-2 w-full hover:bg-slate-300`}>Konfirmasi
-                                </button>
-                            </form>
+                    </section>
+                    {/*    RSVP    */}
+                    <section>
+                        <div className={`p-6 flex flex-col items-center gap-2`}>
+                            <div className={`text-2xl`}>Pesan</div>
+                            <div className={`w-full py-2 flex flex-col gap-2 bg-slate-900 rounded-lg`}>
+                                <div className={`px-2 border-b-2 border-b-slate-800 overflow-y-auto max-h-[315px]`}>
+
+                                    {[{},{},{},{},{},{},{},{},{},{},{}].map((x) => (
+                                        <>
+                                            <div className={`flex flex-col`}>
+                                                <div className={`flex justify-between items-center`}>
+                                                    <div className={`text-amber-400 font-semibold`}>Nama</div>
+                                                    <div className={`text-xs text-slate-400`}>waktu</div>
+                                                </div>
+                                                <div className={`pt-1 pb-2`}>pesan</div>
+                                            </div>
+                                        </>
+                                    ))}
+
+
+                                </div>
+                                <div className={`px-2`}>
+                                    <form onSubmit={handleSubmitMessage}>
+                                        <div>
+                                            <input className={`w-full rounded px-3 py-2 text-gold bg-slate-800`}
+                                                   placeholder={'Nama'}/>
+                                        </div>
+                                        <div className={`mt-2 flex`}>
+                                            <textarea rows={1}
+                                                      className={`bg-slate-800 w-full rounded-l pl-3 py-2`}
+                                                      style={{
+                                                          resize: 'none',
+                                                          outline: 'transparent'
+                                                      }}></textarea>
+                                            <div className={`rounded-r bg-slate-800 p-2 flex justify-end items-center`}>
+                                                <button type={`submit`}
+                                                        className={`rounded-full bg-gold w-8 h-8 text-chiblack hover:bg-amber-500`}>
+                                                    <img className={`ms-1`} style={{width: '24px', height: '24px'}}
+                                                         src={iconUp.src}/>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                    </section>
 
                     {/*   FOOTER    */}
                     <section id={`footer`}>
-                        <div className={`flex flex-col gap-2 pb-24`}>
+                        <div className={`flex flex-col gap-2 pb-24 text-gold`}>
                             <div className={`flex justify-center`}>Wholeheartedly crafted by <a
                                 href={`https://www.instagram.com/hiaruman`} target={`_blank`}
                                 className={`cursor-pointer font-bold ms-1`}>Aruman</a></div>
