@@ -42,4 +42,8 @@ body {
   .mobile {
     @apply w-full max-w-[480px] h-full overflow-auto absolute right-1/2 translate-x-1/2 min-[968px]:right-0 min-[968px]:translate-x-0;
   }
+
+  .mobile::-webkit-scrollbar, .message::-webkit-scrollbar {
+    visibility: hidden;
+  }
 }

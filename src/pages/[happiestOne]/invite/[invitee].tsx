@@ -6,6 +6,7 @@ import iconVercel from "@/assets/svg/vercel.svg";
 import iconMongoDB from "@/assets/svg/mongodb.svg";
 import iconNextJS from "@/assets/svg/nextjs.svg";
 import iconUp from "@/assets/svg/arrow-up.svg";
+import {SvgSpinners180Ring} from "@/shared/components/spinner";
 
 const InvitePage = () => {
     const title: string = "The Happiest One - Osa & Yosi";
@@ -83,17 +84,19 @@ const InvitePage = () => {
 
 
     // Fungsi untuk menangani submit form
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault(); // Mencegah reload halaman
+    const updateStatusAttendance = async (inputPresence: string | undefined) => {
 
-        if (!invitee || !presence) return;
+        if (!invitee) return;
         // Data yang akan dikirim ke API
         const data = {
             invitee,
-            presence,
+            presence: inputPresence ? inputPresence: presence,
             isActive,
             attendanceId
         };
+        console.log('input presence ==> ', inputPresence);
+        console.log('presence ==> ', presence);
+        console.log('data ==> ', data);
             try {
                 // Mengirim data ke API handler menggunakan fetch
                 const response = await fetch(`/api/attendance`, {
@@ -128,14 +131,39 @@ const InvitePage = () => {
     const handleOnChange = (e: any) => {
         const tempStore = JSON.parse(JSON.stringify(presences.filter((x) =>(x.value===e.target.value))));
         if (tempStore.length>0) {
-            console.log('Bener kan ya? ', tempStore[0]);
             setSelectedPresence(tempStore[0]);
             setPresence(tempStore[0].value);
+            updateStatusAttendance(tempStore[0].value).then(r => {});
         }
     }
 
     const handleSubmitMessage = (e : any) => {
         e.preventDefault();
+    }
+
+    const dateStringify = (date:any) => {
+        if (date) {
+            const d = new Date(date);
+            const curDate = new Date();
+            const time = d.getTime();
+            const curTime = curDate.getTime();
+            const selisih = curTime - time;
+            if (selisih < 60000) {
+                return Math.floor(selisih / 1000) + ' detik yang lalu';
+            } else if (selisih >= 60000 && selisih < 3600000) {
+                return Math.floor(selisih / 60000) + ' menit yang lalu';
+            } else if (selisih >= 3600000 && selisih < 86400000) {
+                return Math.floor(selisih / 3600000) + ' jam yang lalu';
+            } else if (selisih >= 86400000 && selisih < 604800000) {
+                return Math.floor(selisih / 86400000) + ' hari yang lalu';
+            } else if (selisih >= 604800000 && selisih < 2592000000) {
+                return Math.floor(selisih / 604800000) + ' minggu yang lalu';
+            } else if (selisih >= 2592000000 && selisih < 31536000000) {
+                return Math.floor(selisih / 2592000000) + ' bulan yang lalu';
+            } else if (selisih >= 31536000000) {
+                return Math.floor(selisih / 31536000000) + ' tahun yang lalu';
+            }
+        }
     }
     return (
         <>
@@ -162,10 +190,12 @@ const InvitePage = () => {
                     <div className="mt-20px text-white ibm-plex-sans fs-12 text-center px-10px">Google Maps</div>
 
                     <div className="p-6">
-                            <iframe className={`w-full rounded-t`}
-                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d247.21969831235202!2d109.05636349373563!3d-7.518647191774238!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e656599ddda4d47%3A0xb6906e33f67bab19!2sGBI%20Shalom%20Wangon!5e0!3m2!1sid!2sid!4v1729760721809!5m2!1sid!2sid"
-                                    allowFullScreen={true} loading="lazy" width="480" height="240"
-                                    referrerPolicy="no-referrer-when-downgrade"></iframe>
+                            <div className={`w-full h-[240px] bg-[#f8f7f7] rounded-t`}>
+                                <iframe className={`w-full rounded-t`}
+                                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d247.21969831235202!2d109.05636349373563!3d-7.518647191774238!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e656599ddda4d47%3A0xb6906e33f67bab19!2sGBI%20Shalom%20Wangon!5e0!3m2!1sid!2sid!4v1729760721809!5m2!1sid!2sid"
+                                        allowFullScreen={true} loading="lazy" width="480" height="240"
+                                        referrerPolicy="no-referrer-when-downgrade"></iframe>
+                            </div>
                             <a href="https://maps.app.goo.gl/tBtovwdC8mfLFfjr6" target="_blank">
                                 <div className={`w-full py-3 rounded-b bg-[#f8f7f7] text-slate-700 text-center`}>Buka
                                     peta
@@ -176,10 +206,12 @@ const InvitePage = () => {
                     <div className="mt-20px text-white ibm-plex-sans fs-12 text-center px-10px">Google Maps</div>
 
                     <div className="p-6">
-                            <iframe className={`w-full rounded-t`}
-                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d989.075867522704!2d109.23294622006077!3d-7.4316319059326394!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e655fcbe5ab4811%3A0xf10047ad2dcd603a!2sConvention%20Hall%20Komplek%20Menara%20Pandang!5e0!3m2!1sid!2sid!4v1729759824849!5m2!1sid!2sid"
-                                    allowFullScreen={true} loading="lazy" width="480" height="240"
-                                    referrerPolicy="no-referrer-when-downgrade"></iframe>
+                            <div className={`w-full h-[240px] bg-[#f8f7f7] rounded-t`}>
+                                <iframe className={`w-full rounded-t`}
+                                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d989.075867522704!2d109.23294622006077!3d-7.4316319059326394!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e655fcbe5ab4811%3A0xf10047ad2dcd603a!2sConvention%20Hall%20Komplek%20Menara%20Pandang!5e0!3m2!1sid!2sid!4v1729759824849!5m2!1sid!2sid"
+                                        allowFullScreen={true} loading="lazy" width="480" height="240"
+                                        referrerPolicy="no-referrer-when-downgrade"></iframe>
+                            </div>
                             <a href="https://maps.app.goo.gl/Pp4d2MacVDEozaJk8" target="_blank">
                                 <div className={`w-full py-3 rounded-b bg-[#f8f7f7] text-slate-700 text-center`}>Buka peta</div>
                             </a>
@@ -189,59 +221,71 @@ const InvitePage = () => {
                     <section>
                         <div className={`p-6 flex flex-col items-center gap-2`}>
                             <div className={`text-2xl`}>RSVP</div>
-                            <div className={`w-full`}>
-                                <select
-                                    className={`w-full p-2.5 rounded-lg appearance-none text-center ${selectedPresence.value === presences[1].value ? 'bg-gold text-chiblack' : (selectedPresence.value === presences[2].value ? 'bg-red-700 text-white' : (selectedPresence.value === presences[3].value ? 'bg-green-700 text-white' : 'bg-slate-300 text-slate-600'))}`}
-                                    value={selectedPresence.value}
-                                    onChange={(e) => {
-                                        const selected = JSON.parse(JSON.stringify(presences.find(p => p.value === e.target.value)));
-                                        setSelectedPresence(selected); // Update the selected presence
-                                    handleOnChange(e)
-                                }}>
-                                    {presences.map((p) => (
-                                        <option key={p.value} value={p.value}>{p.label}</option>
-                                    ))}
-                                </select>
-                            </div>
-                            <div className={`w-full`}>
-                                <form onSubmit={handleSubmit}>
-                                    <button type={`submit`}
-                                            className={`rounded-lg bg-gold text-chiblack py-2 w-full hover:bg-amber-500`}>Konfirmasi
-                                    </button>
-                                </form>
-                            </div>
+                            {(!attendance) && (
+                                <div className={`flex justify-center`}>
+                                    <SvgSpinners180Ring/>
+                                </div>
+                            )}
+                            {(attendance) && (
+                                    <div className={`w-full`}>
+                                        <select
+                                            className={`w-full p-2.5 rounded-lg appearance-none text-center ${selectedPresence.value === presences[1].value ? 'bg-gold text-chiblack' : (selectedPresence.value === presences[2].value ? 'bg-red-700 text-white' : (selectedPresence.value === presences[3].value ? 'bg-green-700 text-white' : 'bg-slate-300 text-slate-600'))}`}
+                                            value={selectedPresence.value}
+                                            onChange={(e) => {
+                                                const selected = JSON.parse(JSON.stringify(presences.find(p => p.value === e.target.value)));
+                                                setSelectedPresence(selected); // Update the selected presence
+                                            handleOnChange(e);
+                                        }}>
+                                            {presences.map((p) => (
+                                                <option key={p.value} value={p.value}>{p.label}</option>
+                                            ))}
+                                        </select>
+                                </div>
+                            )}
                         </div>
                     </section>
-                    {/*    RSVP    */}
+
+
+                    {/*    Message    */}
                     <section>
                         <div className={`p-6 flex flex-col items-center gap-2`}>
                             <div className={`text-2xl`}>Pesan</div>
                             <div className={`w-full py-2 flex flex-col gap-2 bg-slate-900 rounded-lg`}>
-                                <div className={`px-2 border-b-2 border-b-slate-800 overflow-y-auto max-h-[315px]`}>
-
-                                    {[{},{},{},{},{},{},{},{},{},{},{}].map((x) => (
-                                        <>
-                                            <div className={`flex flex-col`}>
-                                                <div className={`flex justify-between items-center`}>
-                                                    <div className={`text-amber-400 font-semibold`}>Nama</div>
-                                                    <div className={`text-xs text-slate-400`}>waktu</div>
-                                                </div>
-                                                <div className={`pt-1 pb-2`}>pesan</div>
-                                            </div>
-                                        </>
-                                    ))}
-
-
+                                {(!greetings) && (
+                                <div className={`flex justify-center`}>
+                                    <SvgSpinners180Ring/>
                                 </div>
+                                )}
+                                {(greetings && greetings.length>0) && (
+                                    <div className={`px-2 border-b-slate-800 overflow-y-auto max-h-[290px] message`}
+                                         style={{borderBottom: '1px solid #1e293b'}}>
+                                        {greetings.map((g: any) => (
+                                            <>
+                                                <div key={g['_id']} className={`flex flex-col`}>
+                                                    <div className={`flex justify-between items-center`}>
+                                                        <div className={`text-amber-400 font-semibold`}>{g.name}</div>
+                                                        <div
+                                                            className={`text-xs text-slate-400`}>{dateStringify(g.createdAt)}</div>
+                                                    </div>
+                                                    <div className={`pt-1 pb-2 text-xs`}>{g.note}</div>
+                                                </div>
+                                            </>
+                                        ))}
+                                    </div>
+                                )}
+
                                 <div className={`px-2`}>
                                     <form onSubmit={handleSubmitMessage}>
                                         <div>
                                             <input className={`w-full rounded px-3 py-2 text-gold bg-slate-800`}
-                                                   placeholder={'Nama'}/>
+                                                   placeholder={'Nama'}
+                                                   style={{outline: 'transparent'}}
+                                            />
                                         </div>
                                         <div className={`mt-2 flex`}>
                                             <textarea rows={1}
                                                       className={`bg-slate-800 w-full rounded-l pl-3 py-2`}
+                                                      placeholder={`Pesan`}
                                                       style={{
                                                           resize: 'none',
                                                           outline: 'transparent'
@@ -262,7 +306,7 @@ const InvitePage = () => {
 
                     {/*   FOOTER    */}
                     <section id={`footer`}>
-                        <div className={`flex flex-col gap-2 pb-24 text-gold`}>
+                        <div className={`flex flex-col gap-2 pt-24 pb-32 text-gold`}>
                             <div className={`flex justify-center`}>Wholeheartedly crafted by <a
                                 href={`https://www.instagram.com/hiaruman`} target={`_blank`}
                                 className={`cursor-pointer font-bold ms-1`}>Aruman</a></div>
