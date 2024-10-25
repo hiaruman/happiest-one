@@ -41,6 +41,7 @@ const InvitePage = () => {
     const [presence, setPresence] = useState(selectedPresence.value);
     const [isActive, setIsActive] = useState(true);
     const [message, setMessage] = useState('');
+
     useEffect(() => {
 
         const fetchAttendance = async (invitee:string) => {
@@ -57,6 +58,7 @@ const InvitePage = () => {
                     })
                     setAttendanceId(data.data['_id']);
                 }
+                setAtdncLoading(false);
             } catch (error) {
                 console.error("Failed to fetch attendance:", error);
             } finally {
@@ -221,12 +223,12 @@ const InvitePage = () => {
                     <section>
                         <div className={`p-6 flex flex-col items-center gap-2`}>
                             <div className={`text-2xl`}>RSVP</div>
-                            {(!attendance) && (
+                            {(isAtdncLoading) && (
                                 <div className={`flex justify-center`}>
                                     <SvgSpinners180Ring/>
                                 </div>
                             )}
-                            {(attendance) && (
+                            {(!isAtdncLoading) && (
                                     <div className={`w-full`}>
                                         <select
                                             className={`w-full p-2.5 rounded-lg appearance-none text-center ${selectedPresence.value === presences[1].value ? 'bg-gold text-chiblack' : (selectedPresence.value === presences[2].value ? 'bg-red-700 text-white' : (selectedPresence.value === presences[3].value ? 'bg-green-700 text-white' : 'bg-slate-300 text-slate-600'))}`}
