@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import {Cinzel} from "next/dist/compiled/@next/font/dist/google";
 import "./globals.css";
 
 const geistSans = localFont({
@@ -13,6 +14,11 @@ const geistMono = localFont({
     weight: "100 900",
 });
 
+const cinzel = Cinzel({
+    subsets: ['latin'],
+    weight: ['400', '500', '600', '700'],
+});
+
 export const metadata: Metadata = {
     title: "The Happiest One",
     description: "Celebrating the happiest",
@@ -23,9 +29,10 @@ export default function RootLayout({
 }: Readonly<{
     children: React.ReactNode;
 }>) {
+    console.log('Cinzel ==> ', Cinzel);
     return (
         <html lang="en">
-            <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+            <body className={`${cinzel.className} antialiased`}>
             {children}
             </body>
         </html>
