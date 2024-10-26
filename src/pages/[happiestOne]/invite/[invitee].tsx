@@ -1,12 +1,16 @@
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import '@/app/globals.css';
-import React, {useEffect, useRef, useState} from "react";
+import React, {ReactEventHandler, useEffect, useRef, useState} from "react";
 import iconVercel from "@/assets/svg/vercel.svg";
 import iconMongoDB from "@/assets/svg/mongodb.svg";
 import iconNextJS from "@/assets/svg/nextjs.svg";
 import iconUp from "@/assets/svg/arrow-up.svg";
+import iconBCA from "@/assets/svg/bca-white.svg";
+import iconBRI from "@/assets/svg/bri-white.svg";
+import iconCopy from "@/assets/svg/copying.svg";
 import {SvgSpinners180Ring} from "@/shared/components/spinner";
+
 
 const InvitePage = () => {
     const title: string = "The Happiest One - Osa & Yosi";
@@ -41,6 +45,10 @@ const InvitePage = () => {
     const [presence, setPresence] = useState(selectedPresence.value);
     const [isActive, setIsActive] = useState(true);
     const [message, setMessage] = useState('');
+    const [flashMessage, setFlashMessage] = useState('');
+
+    const nameRef = useRef();
+    const noteRef = useRef();
 
     useEffect(() => {
 
@@ -136,8 +144,51 @@ const InvitePage = () => {
         }
     }
 
-    const handleSubmitMessage = (e : any) => {
+    const handleSubmitMessage = async (e : any) => {
         e.preventDefault();
+        const name = nameRef.current.value;
+        const note = noteRef.current.value;
+        if ([undefined, null, ''].includes(name) || [undefined, null, ''].includes(note)) return;
+        // Data yang akan dikirim ke API
+
+        const data = {
+            name,
+            note
+        };
+        try {
+            // Mengirim data ke API handler menggunakan fetch
+            const response = await fetch(`/api/greetings`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+
+            if (response.ok) {
+                const result = await response.json();
+                console.log('Result', result);
+                nameRef.current.value = '';
+                noteRef.current.value = '';
+                setMessage('Greetings successfully updated');
+                try {
+                    const res = await fetch('/api/greetings');
+                    const data = await res.json();
+                    if (data && data.data) {
+                        setGreetings(data.data);
+                    }
+                } catch (error) {
+                    console.error("Failed to fetch greetings:", error);
+                } finally {
+                    setGreetLoading(false);
+                }
+            } else {
+                setMessage('Failed to add greetings');
+            }
+        } catch (error) {
+            console.error('Error submitting greetings:', error);
+            setMessage('An error occurred');
+        }
     }
 
     const dateStringify = (date:any) => {
@@ -164,6 +215,34 @@ const InvitePage = () => {
             }
         }
     }
+
+    const copyText = (e: any, txt: string) => {
+        const selBox = document.createElement('textarea');
+        selBox.style.position = 'fixed';
+        selBox.style.left = '0';
+        selBox.style.top = '0';
+        selBox.style.opacity = '0';
+        selBox.value = txt;
+        document.body.appendChild(selBox);
+        selBox.focus();
+        selBox.select();
+        document.execCommand('copy');
+        document.body.removeChild(selBox);
+
+        const msg: string = 'Berhasil salin teks!';
+        setFlashMessage(msg);
+        let el = e.target;
+        if (!e.target.matches('.copy-button')) {
+            el = e.target.parentElement;
+        }
+        el.classList.add("active");
+
+        setTimeout(() => {
+            el.classList.remove("active");
+            setFlashMessage('');
+        }, 2500);
+    }
+
     return (
         <>
             <Head>
@@ -196,8 +275,7 @@ const InvitePage = () => {
                                         referrerPolicy="no-referrer-when-downgrade"></iframe>
                             </div>
                             <a href="https://maps.app.goo.gl/tBtovwdC8mfLFfjr6" target="_blank">
-                                <div className={`w-full py-3 rounded-b-lg bg-[#f8f7f7] text-slate-700 text-center`}>Buka
-                                    peta
+                                <div className={`w-full py-3 rounded-b-lg bg-[#f8f7f7] text-slate-700 text-center`}>Buka peta
                                 </div>
                             </a>
                     </div>
@@ -219,7 +297,7 @@ const InvitePage = () => {
                     {/*    RSVP    */}
                     <section>
                         <div className={`p-6 flex flex-col items-center gap-2`}>
-                            <div className={`text-2xl`}>RSVP</div>
+                            <div className={`text-3xl font-bold`} style={{fontFamily: 'Cinzel Bold'}}>RSVP</div>
                             {(isAtdncLoading) && (
                                 <div className={`flex justify-center`}>
                                     <SvgSpinners180Ring/>
@@ -248,7 +326,7 @@ const InvitePage = () => {
                     {/*    Message    */}
                     <section>
                         <div className={`p-6 flex flex-col items-center gap-2`}>
-                            <div className={`text-2xl `}>Pesan</div>
+                            <div className={`text-3xl font-bold`} style={{fontFamily: 'Cinzel Bold'}}>Pesan</div>
                             <div className={`w-full py-2 flex flex-col gap-2 bg-slate-900 rounded-lg`}>
                                 {(!greetings) && (
                                 <div className={`flex justify-center`}>
@@ -276,14 +354,16 @@ const InvitePage = () => {
                                 <div className={`px-2`}>
                                     <form onSubmit={handleSubmitMessage}>
                                         <div>
-                                            <input className={`w-full rounded px-3 py-2 text-gold bg-slate-800`}
+                                            <input className={`w-full rounded px-3 py-2 text-gold font-semibold bg-slate-800`}
+                                                   ref={nameRef}
                                                    placeholder={'Nama'}
                                                    style={{outline: 'transparent'}}
                                             />
                                         </div>
                                         <div className={`mt-2 flex`}>
                                             <textarea rows={1}
-                                                      className={`bg-slate-800 w-full rounded-l pl-3 py-2`}
+                                                      className={`bg-slate-800 w-full text-xs rounded-l pl-3 py-2`}
+                                                      ref={noteRef}
                                                       placeholder={`Pesan`}
                                                       style={{
                                                           resize: 'none',
@@ -301,6 +381,43 @@ const InvitePage = () => {
                                 </div>
                             </div>
                         </div>
+                    </section>
+
+                    <section id={'gift'} className={`pt-10 px-6 flex flex-col gap-10 items-center`}>
+                        <div className={`text-3xl font-bold`} style={{fontFamily: 'Cinzel Bold'}}>Hadiah</div>
+                        <div className={`text-center`}>Bagi bapak/ibu/saudara/i yang ingin mengirimkan hadiah pernikahan dapat melalui nomor rekening yang tertera di bawah</div>
+                        <div className={`flex flex-col gap-2 items-center`}>
+                            <div><img className={`h-6`} src={iconBCA.src} /></div>
+                            <div>a.n. Yohanes Osa Hamara</div>
+                            <div className={`flex`}>0462168321 <span onClick={(e)=> {copyText(e,`0462168321`)}} className={`cursor-pointer ml-2`} title={`Salin`}><img src={iconCopy.src} className={`h-4`} alt={`copy`} /></span></div>
+                        </div>
+                        <div className={`flex flex-col gap-2 items-center`}>
+                            <div><img className={`h-8`} src={iconBRI.src}/></div>
+                            <div>a.n. Yosiana Dwi Saputri</div>
+                            <div className={`flex`}>0077-0113-3939-505 <span onClick={(e) => {
+                                copyText(e, `0077-0113-3939-505`)
+                            }} className={`cursor-pointer ml-2`} title={`Salin`}><img src={iconCopy.src}
+                                                                                      className={`h-4`}
+                                                                                      alt={`copy`}/></span></div>
+                        </div>
+                        <div className={'text-center w-full'}>
+                            atau bagi bapak/ibu/saudara/i yang ingin mengirimkan hadiah pernikahan berupa fisik dapat ditujukan ke alamat berikut
+                        </div>
+                        <div className={`flex flex-col gap-4 items-center`}>
+                            <div className={`font-bold`}>Kantor Hukum Hamara & Partners</div>
+
+                            <div className={`flex items-center`}>
+                                <div className={`text-center w-full`}>
+                                    Kantor Hukum Hamara & Partners. Jl. Profesor Dr. Soeharso (samping mie ayam tunggal rasa), Glempang, Bancarkembar, Kec. Purwokerto Utara, Kab. Banyumas, Jawa Tengah 53114
+                                </div>
+                                <div onClick={(e) => { copyText(e,
+                                    `Kantor Hukum Hamara & Partners. Jl. Profesor Dr. Soeharso (samping mie ayam tunggal rasa), Glempang, Bancarkembar, Kec. Purwokerto Utara, Kab. Banyumas, Jawa Tengah 53114`
+                                )}} className={`cursor-pointer ml-2 w-12`} title={`Salin`}>
+                                    <img src={iconCopy.src} className={`h-4`} alt={`copy`}/>
+                                </div>
+                            </div>
+                        </div>
+                        <div className={`flash-message`}>{flashMessage}</div>
                     </section>
 
                     {/*   FOOTER    */}

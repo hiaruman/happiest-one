@@ -2,6 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  @font-face {
+    font-family: 'Cinzel';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('/fonts/cinzel.woff') format('woff');
+  }
+  @font-face {
+    font-family: 'Cinzel Bold';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url('/fonts/cinzel-bold.woff') format('woff');
+  }
+}
+
 :root {
   /*--background: #ffffff;*/
   /*--foreground: #171717;*/
@@ -44,6 +61,6 @@ body {
   }
 
   .mobile::-webkit-scrollbar, .message::-webkit-scrollbar {
-    visibility: hidden;
+    display: none;
   }
 }
