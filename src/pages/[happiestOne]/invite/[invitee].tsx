@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import '@/app/globals.css';
-import React, {ReactEventHandler, useEffect, useRef, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import iconVercel from "@/assets/svg/vercel.svg";
 import iconMongoDB from "@/assets/svg/mongodb.svg";
 import iconNextJS from "@/assets/svg/nextjs.svg";
@@ -9,7 +9,11 @@ import iconUp from "@/assets/svg/arrow-up.svg";
 import iconBCA from "@/assets/svg/bca-white.svg";
 import iconBRI from "@/assets/svg/bri-white.svg";
 import iconCopy from "@/assets/svg/copying.svg";
+import theBride from "@/assets/img/Yosi.jpg";
+import theGroom from "@/assets/img/Osa.jpg";
+import OR1 from "@/assets/svg/OR1.svg";
 import {SvgSpinners180Ring} from "@/shared/components/spinner";
+import Image from "next/image";
 
 
 const InvitePage = () => {
@@ -47,8 +51,8 @@ const InvitePage = () => {
     const [message, setMessage] = useState('');
     const [flashMessage, setFlashMessage] = useState('');
 
-    const nameRef = useRef();
-    const noteRef = useRef();
+    const nameRef = useRef<HTMLInputElement>(null);
+    const noteRef = useRef<HTMLTextAreaElement>(null);
 
     useEffect(() => {
 
@@ -146,8 +150,8 @@ const InvitePage = () => {
 
     const handleSubmitMessage = async (e : any) => {
         e.preventDefault();
-        const name = nameRef.current.value;
-        const note = noteRef.current.value;
+        const name = nameRef.current ? (nameRef.current as any).value : '';
+        const note = noteRef.current ? (noteRef.current as any).value : '';
         if ([undefined, null, ''].includes(name) || [undefined, null, ''].includes(note)) return;
         // Data yang akan dikirim ke API
 
@@ -168,8 +172,8 @@ const InvitePage = () => {
             if (response.ok) {
                 const result = await response.json();
                 console.log('Result', result);
-                nameRef.current.value = '';
-                noteRef.current.value = '';
+                name.value = '';
+                note.value = '';
                 setMessage('Greetings successfully updated');
                 try {
                     const res = await fetch('/api/greetings');
@@ -250,7 +254,7 @@ const InvitePage = () => {
             </Head>
             <div className={`w-full h-full flex text-xs md:text-sm`}>
                 <div className={`desktop-foreground`}>Ini Tidak Terlihat</div>
-                <div className={`mobile bg-[#000000]`} style={{scrollbarGutter: 'stable'}}>
+                <div className={`mobile bg-[#10101b]`} style={{scrollbarGutter: 'stable'}}>
 
 
                     <div>
@@ -265,12 +269,64 @@ const InvitePage = () => {
                     <button onClick={playAudio}>Play</button>
                     <button onClick={pauseAudio}>Pause</button>
 
+                    <section id={`couple`} className={`px-6`}>
+                        <div className={`flex flex-col items-center mb-8 gap-2`}>
+                            <div className={`text-center`}>Tuhan membuat segala sesuatu indah pada waktu-Nya.</div>
+                            <div className={`text-center`}>Indah saat Dia mempertemukan kami,</div>
+                            <div className={`text-center`}>indah saat Dia menumbuhkan kasih di antara kami,</div>
+                            <div className={`text-center`}>dan indah saat Dia mempersatukan kami dalam</div>
+                            <div>suatu Ikatan Pernikahan Kudus</div>
+                        </div>
+                        <div className={`flex mb-4`}>
+                            <div className={'max-w-72'}>
+                                <Image src={theBride.src} width={240} height={320} alt={'The Bride'}/>
+                            </div>
+                            <div className={`max-h-96 relative w-12 bg-gold`}>
+                                <div className={`cinzel-bold text-chiblack text-3xl text-center w-60`} style={{
+                                    position: 'absolute',
+                                    right: 0,
+                                    transform: 'translateX(40%) translateY(150px) rotate(90deg)'
+                                }}>THE BRIDE
+                                </div>
+                            </div>
+                        </div>
+                        <div className={`flex flex-col`}>
+                            <div className={`max-w-80 flex flex-col gap-2`}>
+                                <div className={`cinzel-bold text-gold text-xl`}>Yosiana Dwi Saputri, A.Md.Farm</div>
+                                <div>Putri kedua dari Bapak Priyoko & Ibu Sri Esti Rahayu</div>
+                                <div>Sumbang, Banyumas</div>
+                            </div>
+                        </div>
+                        <div className={`text-7xl playfair-display mb-12 mt-8 text-gold text-center`}>&</div>
+                        <div className={`flex justify-end mb-4`}>
+                            <div className={`max-h-96 relative w-12 bg-gold`}>
+                                <div className={`cinzel-bold text-chiblack text-3xl text-center w-60`} style={{
+                                    position: 'absolute',
+                                    right: 0,
+                                    transform: 'translateX(40%) translateY(150px) rotate(-90deg)'
+                                }}>THE GROOM
+                                </div>
+                            </div>
+                            <div className={'max-w-72'}>
+                                <Image src={theGroom.src} width={240} height={320} alt={'The Groom'}/>
+                            </div>
+                        </div>
+                        <div className={`flex flex-col items-end`}>
+                            <div className={`max-w-80 flex flex-col gap-2`}>
+                                <div className={`cinzel-bold text-gold text-xl text-right`}>Dr (cand) Yohanes Osa Hamara, S.H., M.H.</div>
+                                <div className={`text-right`}>Putra pertama dari Bapak Antonius Rio Tripurboyo & Ibu Nur Endah Sumiati (Menuk)</div>
+                                <div className={`text-right`}>Wangon, Banyumas</div>
+                            </div>
+                        </div>
+
+                    </section>
+
                     <div className="mt-20px text-white ibm-plex-sans fs-12 text-center px-10px">Google Maps</div>
 
                     <div className="p-6">
-                            <div className={`w-full h-[240px] bg-[#f8f7f7] rounded-t-lg`}>
-                                <iframe className={`w-full rounded-t-lg`}
-                                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d247.21969831235202!2d109.05636349373563!3d-7.518647191774238!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e656599ddda4d47%3A0xb6906e33f67bab19!2sGBI%20Shalom%20Wangon!5e0!3m2!1sid!2sid!4v1729760721809!5m2!1sid!2sid"
+                        <div className={`w-full h-[240px] bg-[#f8f7f7] rounded-t-lg`}>
+                            <iframe className={`w-full rounded-t-lg`}
+                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d247.21969831235202!2d109.05636349373563!3d-7.518647191774238!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e656599ddda4d47%3A0xb6906e33f67bab19!2sGBI%20Shalom%20Wangon!5e0!3m2!1sid!2sid!4v1729760721809!5m2!1sid!2sid"
                                         allowFullScreen={true} loading="lazy" width="480" height="240"
                                         referrerPolicy="no-referrer-when-downgrade"></iframe>
                             </div>
@@ -297,7 +353,7 @@ const InvitePage = () => {
                     {/*    RSVP    */}
                     <section>
                         <div className={`p-6 flex flex-col items-center gap-2`}>
-                            <div className={`text-3xl font-bold`} style={{fontFamily: 'Cinzel Bold'}}>RSVP</div>
+                            <div className={`text-3xl font-bold text-gold`} style={{fontFamily: 'Cinzel Bold'}}>RSVP</div>
                             {(isAtdncLoading) && (
                                 <div className={`flex justify-center`}>
                                     <SvgSpinners180Ring/>
@@ -326,16 +382,16 @@ const InvitePage = () => {
                     {/*    Message    */}
                     <section>
                         <div className={`p-6 flex flex-col items-center gap-2`}>
-                            <div className={`text-3xl font-bold`} style={{fontFamily: 'Cinzel Bold'}}>Pesan</div>
-                            <div className={`w-full py-2 flex flex-col gap-2 bg-slate-900 rounded-lg`}>
+                            <div className={`text-3xl font-bold text-gold`} style={{fontFamily: 'Cinzel Bold'}}>Pesan</div>
+                            <div className={`w-full py-4 flex flex-col gap-4 bg-slate-950 rounded-lg`}>
                                 {(!greetings) && (
                                 <div className={`flex justify-center`}>
                                     <SvgSpinners180Ring/>
                                 </div>
                                 )}
                                 {(greetings && greetings.length>0) && (
-                                    <div className={`px-2 border-b-slate-800 overflow-y-auto max-h-[290px] message`}
-                                         style={{borderBottom: '1px solid #1e293b'}}>
+                                    <div className={`px-4 overflow-y-auto max-h-[290px] message`}
+                                         style={{borderBottom: '1px solid #161627'}}>
                                         {greetings.map((g: any) => (
                                             <>
                                                 <div key={g['_id']} className={`flex flex-col`}>
@@ -354,7 +410,7 @@ const InvitePage = () => {
                                 <div className={`px-2`}>
                                     <form onSubmit={handleSubmitMessage}>
                                         <div>
-                                            <input className={`w-full rounded px-3 py-2 text-gold font-semibold bg-slate-800`}
+                                            <input className={`w-full rounded px-3 py-2 text-gold font-semibold bg-[#10101b]`}
                                                    ref={nameRef}
                                                    placeholder={'Nama'}
                                                    style={{outline: 'transparent'}}
@@ -362,18 +418,17 @@ const InvitePage = () => {
                                         </div>
                                         <div className={`mt-2 flex`}>
                                             <textarea rows={1}
-                                                      className={`bg-slate-800 w-full text-xs rounded-l pl-3 py-2`}
+                                                      className={`bg-[#10101b] w-full text-xs rounded-l pl-3 py-2`}
                                                       ref={noteRef}
                                                       placeholder={`Pesan`}
                                                       style={{
                                                           resize: 'none',
                                                           outline: 'transparent'
                                                       }}></textarea>
-                                            <div className={`rounded-r bg-slate-800 p-2 flex justify-end items-center`}>
+                                            <div className={`rounded-r bg-[#10101b] p-2 flex justify-end items-center`}>
                                                 <button type={`submit`}
                                                         className={`rounded-full bg-gold w-8 h-8 text-chiblack hover:bg-amber-500`}>
-                                                    <img className={`ms-1`} style={{width: '24px', height: '24px'}}
-                                                         src={iconUp.src}/>
+                                                    <Image className={`ms-1`} height={24} width={24} src={iconUp.src} alt={`icon-up`} />
                                                 </button>
                                             </div>
                                         </div>
@@ -384,15 +439,19 @@ const InvitePage = () => {
                     </section>
 
                     <section id={'gift'} className={`pt-10 px-6 flex flex-col gap-10 items-center`}>
-                        <div className={`text-3xl font-bold`} style={{fontFamily: 'Cinzel Bold'}}>Hadiah</div>
+                        <div className={`text-3xl font-bold text-gold`} style={{fontFamily: 'Cinzel Bold'}}>Hadiah</div>
                         <div className={`text-center`}>Bagi bapak/ibu/saudara/i yang ingin mengirimkan hadiah pernikahan dapat melalui nomor rekening yang tertera di bawah</div>
                         <div className={`flex flex-col gap-2 items-center`}>
-                            <div><img className={`h-6`} src={iconBCA.src} /></div>
+                            <div>
+                                <Image width={72} height={24} className={`h-8`} style={{width: `auto`}} src={iconBCA.src} alt={`BCA`}/>
+                            </div>
                             <div>a.n. Yohanes Osa Hamara</div>
                             <div className={`flex`}>0462168321 <span onClick={(e)=> {copyText(e,`0462168321`)}} className={`cursor-pointer ml-2`} title={`Salin`}><img src={iconCopy.src} className={`h-4`} alt={`copy`} /></span></div>
                         </div>
                         <div className={`flex flex-col gap-2 items-center`}>
-                            <div><img className={`h-8`} src={iconBRI.src}/></div>
+                            <div>
+                                <Image width={72} height={24} style={{width: `auto`}} src={iconBRI.src} alt={`BRI`}/>
+                            </div>
                             <div>a.n. Yosiana Dwi Saputri</div>
                             <div className={`flex`}>0077-0113-3939-505 <span onClick={(e) => {
                                 copyText(e, `0077-0113-3939-505`)
@@ -419,10 +478,18 @@ const InvitePage = () => {
                         </div>
                         <div className={`flash-message`}>{flashMessage}</div>
                     </section>
+                    <section className={`px-3 flex justify-center mb-10`}>
+                        <Image src={OR1.src} width={100} height={20} alt={'gutter'} style={{width: '100%'}}/>
+                    </section>
+                    <section id={`closing`} className={`px-6`}>
+                        <div className={`flex justify-center text-center`}>Bersama dengan kasih Tuhan, kami berharap kehadiran dan doa dari Bapak/Ibu/Saudara/i pada momen penuh bahagia ini. Terima kasih atas perhatian dan kasih yang telah diberikan.</div>
+                        <div className={`text-center mt-8`}>The Happiest One</div>
+                        <div className={`text-3xl flex gap-2 text-gold justify-center items-baseline`}><span className={`cinzel-bold`}>Yosi</span><span className={`playfair-display text-4xl`}>&</span><span className={`cinzel-bold`}>Osa</span></div>
+                    </section>
 
                     {/*   FOOTER    */}
                     <section id={`footer`}>
-                        <div className={`flex flex-col gap-2 pt-24 pb-32 text-gold`}>
+                        <div className={`flex flex-col gap-2 pt-24 pb-32`}>
                             <div className={`flex justify-center`}>Wholeheartedly crafted by <a
                                 href={`https://www.instagram.com/hiaruman`} target={`_blank`}
                                 className={`cursor-pointer font-bold ms-1`}>Aruman</a></div>

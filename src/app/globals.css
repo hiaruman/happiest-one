@@ -17,6 +17,27 @@
     font-display: swap;
     src: url('/fonts/cinzel-bold.woff') format('woff');
   }
+  @font-face {
+    font-family: 'Literata';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('/fonts/Literata-Regular.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: 'Playfair Display';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('/fonts/PlayfairDisplay-Regular.woff') format('woff');
+  }
+  @font-face {
+    font-family: 'Lora';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('/fonts/lora-regular-webfont.woff') format('woff');
+  }
 }
 
 :root {
@@ -42,7 +63,29 @@ html, body, #__next {
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Lora", Helvetica, sans-serif;
+}
+
+@layer base {
+  .playfair-display {
+    font-family: "Playfair Display";
+  }
+
+  .lora {
+    font-family: "Lora";
+  }
+
+  .literata {
+    font-family: "Literata";
+  }
+
+  .cinzel {
+    font-family: "Cinzel";
+  }
+
+  .cinzel-bold {
+    font-family: "Cinzel Bold";
+  }
 }
 
 @layer utilities {
