@@ -15,7 +15,6 @@ import OR1 from "@/assets/svg/OR1.svg";
 import OR2 from "@/assets/svg/OR2.2.svg";
 import turntable from "@/assets/svg/turntable.svg";
 import vinyl from "@/assets/svg/vinyl.svg";
-import foreGround from "@/assets/img/foreground.jpg";
 import {SvgSpinners180Ring} from "@/shared/components/spinner";
 import Image from "next/image";
 
