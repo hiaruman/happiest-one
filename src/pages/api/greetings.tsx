@@ -40,6 +40,8 @@ export default async function handler(req: any, res: any) {
             // Save the greetings record to the database
             await newGreetings.save();
 
+            console.log('New Greetings ==> ', newGreetings);
+
             // Respond with the newly created greetings record
             res.status(201).json(newGreetings);
 

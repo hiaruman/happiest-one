@@ -193,14 +193,21 @@ const InvitePage = () => {
             if (response.ok) {
                 const result = await response.json();
                 console.log('Result', result);
-                name.value = '';
-                note.value = '';
+                console.log(name, note);
+                nameRef.current ? (nameRef.current as any).value = '' : '';
+                noteRef.current ? (noteRef.current as any).value = '' : '';
                 setMessage('Greetings successfully updated');
                 try {
                     const res = await fetch('/api/greetings');
                     const data = await res.json();
                     if (data && data.data) {
                         setGreetings(data.data);
+                        const msg: string = 'Berhasil mengirim pesan';
+                        showflashMessage(msg);
+                        setTimeout(() => {
+                            const messageBox: HTMLElement | null = document.getElementById('message-box');
+                            if (messageBox) messageBox.scrollTop = messageBox.scrollHeight + 48;
+                        }, 100);
                     }
                 } catch (error) {
                     console.error("Failed to fetch greetings:", error);
@@ -254,16 +261,13 @@ const InvitePage = () => {
         document.execCommand('copy');
         document.body.removeChild(selBox);
 
-        const msg: string = 'Berhasil salin teks!';
-        setFlashMessage(msg);
-        let el = e.target;
-        if (!e.target.matches('.copy-button')) {
-            el = e.target.parentElement;
-        }
-        el.classList.add("active");
+        const msg: string = 'Berhasil salin teks';
+        showflashMessage(msg);
+    }
 
+    const showflashMessage = (txt:string) => {
+        setFlashMessage(txt);
         setTimeout(() => {
-            el.classList.remove("active");
             setFlashMessage('');
         }, 2500);
     }
@@ -299,9 +303,9 @@ const InvitePage = () => {
                     <div className={`${flashMessage ? 'flash-message' : 'hidden'}`}><span className={`p-2`}
                                                                                           onClick={() => {
                                                                                               setFlashMessage('');
-                                                                                          }}>&#10005;</span><span>{flashMessage}</span>
+                                                                                          }}>&#10005;</span><span className={`mr-4`}>{flashMessage}</span>
                     </div>
-                    <div className={`absolute bottom-16 left-4 cursor-pointer`} onClick={() => {
+                    <div className={`absolute bottom-16 left-6 cursor-pointer`} onClick={() => {
                         toggleAudio();
                     }}>
                         <div className={'w-12 h-12'}>
@@ -443,7 +447,7 @@ const InvitePage = () => {
                                         </div>
                                     )}
                                     {(greetings && greetings.length > 0) && (
-                                        <div className={`px-4 overflow-y-auto max-h-[290px] message`}
+                                        <div id={`message-box`} className={`px-4 overflow-y-auto max-h-[290px] message`}
                                              style={{borderBottom: '1px solid #d2a339'}}>
                                             {greetings.map((g: any) => (
                                                 <>

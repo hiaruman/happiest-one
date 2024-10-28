@@ -118,7 +118,7 @@ body {
   }
 
   .flash-message {
-    @apply fixed z-30 text-green-700 bottom-[4.5rem] flex items-center right-10 min-h-8 min-w-44 bg-white rounded border-l-8 border-green-700;
+    @apply fixed z-30 text-green-700 bottom-[4.5rem] flex items-center right-6 min-h-8 min-w-44 bg-white rounded border-l-8 border-green-700;
   }
 }
 
