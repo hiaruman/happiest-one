@@ -9,12 +9,13 @@ import iconUp from "@/assets/svg/arrow-up.svg";
 import iconBCA from "@/assets/svg/bca-white.svg";
 import iconBRI from "@/assets/svg/bri-white.svg";
 import iconCopy from "@/assets/svg/copying.svg";
-import theBride from "@/assets/img/Yosi.jpg";
-import theGroom from "@/assets/img/Osa.jpg";
+import theBride from "@/assets/img/yosi.jpg";
+import theGroom from "@/assets/img/osa.jpg";
 import OR1 from "@/assets/svg/OR1.svg";
+import OR2 from "@/assets/svg/OR2.2.svg";
 import turntable from "@/assets/svg/turntable.svg";
 import vinyl from "@/assets/svg/vinyl.svg";
-import foreGround from "@/assets/img/Foreground.jpg";
+import foreGround from "@/assets/img/foreground.jpg";
 import {SvgSpinners180Ring} from "@/shared/components/spinner";
 import Image from "next/image";
 
@@ -273,14 +274,32 @@ const InvitePage = () => {
                 <title>{title}</title>
             </Head>
             <div className={`w-full h-full flex text-xs md:text-sm`}>
-                <div className={`desktop-foreground`} style={{width: `calc(100% - 480px)`}}>
-                    {/*<Image className={`w-full h-full object-cover object-center`} src={foreGround.src} alt={`Foreground`} height={250} width={500}/>*/}
+                <div className={`desktop-foreground relative`} style={{width: `calc(100% - 480px)`}}>
+                    <img className={`w-full h-full object-cover object-right`} src={`/img/foreground.jpg`} alt={`Foreground`}/>
+                    <div className={`w-2 h-full absolute right-0 bg-black opacity-50 top-0`}></div>
+                    <div className={`w-full h-full absolute left-0 top-0`} style={{backgroundColor: `rgba(0, 0, 0, 0.4)`}}>
+                        <section className={`my-20`}>
+                            <div className={`px-6 flex flex-col items-center gap-6`} style={{maxWidth: `480px`}}>
+                                <p className={`text-center leading-8`}>
+                                    Sebab pada awal dunia, Allah menjadikan mereka laki-laki dan perempuan, sebab itu laki-laki akan meninggalkan ayahnya dan ibunya dan bersatu dengan isterinya,
+                                    sehingga keduanya itu menjadi satu daging.
+                                    <br/>
+                                    Demikianlah mereka bukan lagi dua, melainkan satu.
+                                    <br/>
+                                    Karena itu, apa yang telah dipersatukan Allah, tidak boleh diceraikan manusia.
+                                </p>
+                                <div className={`cinzel-bold text-gold`}>MARKUS 10:6-9</div>
+                            </div>
+                        </section>
+                    </div>
                 </div>
                 <div
-                    className={`w-full max-w-[480px] absolute right-1/2 translate-x-1/2 min-[968px]:right-0 min-[968px]:translate-x-0`} style={{height: '100vh'}}>
-                    <div className={`${flashMessage ? 'flash-message' : 'hidden'}`}><span className={`p-2`} onClick={() => {
-                        setFlashMessage('');
-                    }}>&#10005;</span><span>{flashMessage}</span>
+                    className={`w-full max-w-[480px] absolute right-1/2 translate-x-1/2 min-[968px]:right-0 min-[968px]:translate-x-0`}
+                    style={{height: '100vh'}}>
+                    <div className={`${flashMessage ? 'flash-message' : 'hidden'}`}><span className={`p-2`}
+                                                                                          onClick={() => {
+                                                                                              setFlashMessage('');
+                                                                                          }}>&#10005;</span><span>{flashMessage}</span>
                     </div>
                     <div className={`absolute bottom-4 left-4 cursor-pointer`} onClick={() => {
                         toggleAudio();
@@ -293,10 +312,19 @@ const InvitePage = () => {
                                    height={32} alt={'Vinyl'}/>
                         </div>
                     </div>
-                    <div className={`mobile bg-[#10101b]`} style={{scrollbarGutter: 'stable'}}>
+                    <div className={`mobile text-brown`} style={{
+                        scrollbarGutter: 'stable',
+                        backgroundImage: `url(${OR2.src})`,
+                        backgroundPositionX: `center`,
+                        backgroundColor: `#f3eee1`
+                    }}>
 
+                        <section className={`px-3 items-center mt-16 mb-10 flex flex-col`}>
+                            <Image src={OR1.src} width={100} height={20} alt={'gutter'} style={{width: '75%'}}/>
+                            <div className={`cinzel-bold text-gold text-2xl mt-8`}>Salam Sejahtera</div>
+                        </section>
                         <section id={`couple`} className={`px-6`}>
-                            <div className={`flex flex-col items-center mt-32 mb-8 gap-2`}>
+                            <div className={`flex flex-col items-center mb-8 gap-2`}>
                                 <p className={`text-center leading-8`}>
                                     Tuhan membuat segala sesuatu indah pada waktu-Nya.<br/>
                                     Indah saat Dia mempertemukan kami,<br/>
@@ -309,8 +337,8 @@ const InvitePage = () => {
                                 <div className={'max-w-72'}>
                                     <Image src={theBride.src} width={240} height={320} alt={'The Bride'}/>
                                 </div>
-                                <div className={`max-h-96 relative w-12 bg-gold`}>
-                                    <div className={`cinzel-bold text-chiblack text-3xl text-center w-60`} style={{
+                                <div className={`max-h-96 relative w-12 bg-brown`}>
+                                    <div className={`cinzel-bold text-alabaster text-3xl text-center w-60`} style={{
                                         position: 'absolute',
                                         right: 0,
                                         transform: 'translateX(40%) translateY(150px) rotate(90deg)'
@@ -328,8 +356,8 @@ const InvitePage = () => {
                             </div>
                             <div className={`text-7xl playfair-display mb-12 mt-8 text-gold text-center`}>&</div>
                             <div className={`flex justify-end mb-4`}>
-                                <div className={`max-h-96 relative w-12 bg-gold`}>
-                                    <div className={`cinzel-bold text-chiblack text-3xl text-center w-60`} style={{
+                                <div className={`max-h-96 relative w-12 bg-brown`}>
+                                    <div className={`cinzel-bold text-alabaster text-3xl text-center w-60`} style={{
                                         position: 'absolute',
                                         right: 0,
                                         transform: 'translateX(40%) translateY(150px) rotate(-90deg)'
@@ -358,7 +386,9 @@ const InvitePage = () => {
                         <section className={`my-20`}>
                             <div className={`px-6 flex flex-col items-center gap-6`}>
                                 <p className={`text-center leading-8`}>
-                                    Sebab pada awal dunia, Allah menjadikan mereka laki-laki dan perempuan, sebab itu laki-laki akan meninggalkan ayahnya dan ibunya dan bersatu dengan isterinya, sehingga keduanya itu menjadi satu daging.
+                                    Sebab pada awal dunia, Allah menjadikan mereka laki-laki dan perempuan, sebab itu
+                                    laki-laki akan meninggalkan ayahnya dan ibunya dan bersatu dengan isterinya,
+                                    sehingga keduanya itu menjadi satu daging.
                                     <br/>
                                     Demikianlah mereka bukan lagi dua, melainkan satu.
                                     <br/>
@@ -551,9 +581,6 @@ const InvitePage = () => {
                                     </div>
                                 </div>
                             </div>
-                        </section>
-                        <section className={`px-3 flex justify-center my-10`}>
-                            <Image src={OR1.src} width={100} height={20} alt={'gutter'} style={{width: '100%'}}/>
                         </section>
                         <section id={`closing`} className={`px-6`}>
                             <div className={`flex justify-center text-center`}>Bersama dengan kasih Tuhan, kami berharap

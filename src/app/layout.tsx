@@ -25,9 +25,12 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-            <body className={`antialiased`}>
-            {children}
-            </body>
+        <head>
+            <link href="https://fonts.cdnfonts.com/css/inclusive-sans-2" rel="stylesheet"/>
+        </head>
+        <body className={`antialiased`}>
+        {children}
+        </body>
         </html>
     );
 }

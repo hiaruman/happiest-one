@@ -1,3 +1,5 @@
+@import url('https://fonts.cdnfonts.com/css/inclusive-sans-2');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -63,7 +65,7 @@ html, body, #__next {
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: "Lora", Helvetica, sans-serif;
+  font-family: "Inclusive Sans", Helvetica, sans-serif;
 }
 
 @layer base {
@@ -85,6 +87,10 @@ body {
 
   .cinzel-bold {
     font-family: "Cinzel Bold";
+  }
+
+  .inclusive-sans {
+    font-family: 'Inclusive Sans', sans-serif;
   }
 }
 

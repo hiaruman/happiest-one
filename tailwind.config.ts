@@ -11,8 +11,10 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
-        gold: "#feb602",
-        chiblack: "#121212"
+        gold: "#d2a339",
+        chiblack: "#121212",
+        brown: "#5a400f",
+        alabaster: "#f3eee1"
       },
     },
   },
