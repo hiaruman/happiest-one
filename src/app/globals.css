@@ -92,6 +92,10 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+
+  .rotate {
+    animation: rotate 4s linear infinite;
+  }
 }
 
 @layer components {
@@ -100,10 +104,23 @@ body {
   }
 
   .mobile {
-    @apply w-full max-w-[480px] h-full overflow-auto absolute right-1/2 translate-x-1/2 min-[968px]:right-0 min-[968px]:translate-x-0;
+    @apply w-full h-full overflow-auto;
   }
 
   .mobile::-webkit-scrollbar, .message::-webkit-scrollbar {
     display: none;
+  }
+
+  .flash-message {
+    @apply fixed z-30 text-green-700 bottom-10 flex items-center right-10 min-h-8 min-w-44 bg-white rounded border-l-8 border-green-700;
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
   }
 }
