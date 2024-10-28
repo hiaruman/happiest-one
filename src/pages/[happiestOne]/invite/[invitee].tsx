@@ -9,10 +9,11 @@ import iconUp from "@/assets/svg/arrow-up.svg";
 import iconBCA from "@/assets/svg/bca-white.svg";
 import iconBRI from "@/assets/svg/bri-white.svg";
 import iconCopy from "@/assets/svg/copying.svg";
-import theBride from "@/assets/img/Yosi.jpg";
-import theGroom from "@/assets/img/Osa.jpg";
+import theBride from "@/assets/img/Yosi 2.png";
+import theGroom from "@/assets/img/Osa 2.png";
 import OR1 from "@/assets/svg/OR1.svg";
 import OR2 from "@/assets/svg/OR2.2.svg";
+import OR3 from "@/assets/svg/OR3.svg";
 import turntable from "@/assets/svg/turntable.svg";
 import vinyl from "@/assets/svg/vinyl.svg";
 import {SvgSpinners180Ring} from "@/shared/components/spinner";
@@ -300,15 +301,15 @@ const InvitePage = () => {
                                                                                               setFlashMessage('');
                                                                                           }}>&#10005;</span><span>{flashMessage}</span>
                     </div>
-                    <div className={`absolute bottom-4 left-4 cursor-pointer`} onClick={() => {
+                    <div className={`absolute bottom-16 left-4 cursor-pointer`} onClick={() => {
                         toggleAudio();
                     }}>
-                        <div className={'w-8 h-8'}>
+                        <div className={'w-12 h-12'}>
                             <audio ref={audioRef} src={`/audio/song1.mp3`}/>
-                            <Image className={`absolute bottom-0 left-0 z-10`} src={turntable.src} width={32}
-                                   height={32} alt={'Turntable'}/>
-                            <Image id={`vinyl`} style={{transform: `rotate(${rad}deg)`}} src={vinyl.src} width={32}
-                                   height={32} alt={'Vinyl'}/>
+                            <Image className={`absolute bottom-0 left-0 z-10`} src={turntable.src} width={48}
+                                   height={48} style={{width: `48px`, height: `48px`}} alt={'Turntable'}/>
+                            <Image id={`vinyl`} style={{transform: `rotate(${rad}deg)`, width: `48px`, height: `48px`}} src={vinyl.src} width={48}
+                                   height={48} alt={'Vinyl'}/>
                         </div>
                     </div>
                     <div className={`mobile text-brown`} style={{
@@ -332,52 +333,22 @@ const InvitePage = () => {
                                     suatu Ikatan Pernikahan Kudus<br/>
                                 </p>
                             </div>
-                            <div className={`flex mb-4`}>
-                                <div className={'max-w-72'}>
-                                    <Image src={theBride.src} width={240} height={320} alt={'The Bride'}/>
-                                </div>
-                                <div className={`max-h-96 relative w-12 bg-brown`}>
-                                    <div className={`cinzel-bold text-alabaster text-3xl text-center w-60`} style={{
-                                        position: 'absolute',
-                                        right: 0,
-                                        transform: 'translateX(40%) translateY(150px) rotate(90deg)'
-                                    }}>THE BRIDE
-                                    </div>
-                                </div>
+                            <div className={`flex justify-center mb-4`}>
+                                <Image src={theBride.src} width={240} height={320} style={{width: `80%`}} alt={'The Bride'}/>
                             </div>
-                            <div className={`flex flex-col`}>
-                                <div className={`max-w-80 flex flex-col gap-2`}>
-                                    <div className={`cinzel-bold text-gold text-xl`}>Yosiana Dwi Saputri, A.Md.Farm
-                                    </div>
-                                    <div>Putri kedua dari Bapak Priyoko & Ibu Sri Esti Rahayu</div>
-                                    <div>Sumbang, Banyumas</div>
-                                </div>
+                            <div className={`flex items-center flex-col gap-2`}>
+                                <div className={`cinzel-bold text-gold text-xl`}>Yosiana Dwi Saputri, A.Md.Farm</div>
+                                <div>Putri kedua dari Bapak Priyoko & Ibu Sri Esti Rahayu</div>
+                                <div>Sumbang, Banyumas</div>
                             </div>
-                            <div className={`text-7xl playfair-display mb-12 mt-8 text-gold text-center`}>&</div>
-                            <div className={`flex justify-end mb-4`}>
-                                <div className={`max-h-96 relative w-12 bg-brown`}>
-                                    <div className={`cinzel-bold text-alabaster text-3xl text-center w-60`} style={{
-                                        position: 'absolute',
-                                        right: 0,
-                                        transform: 'translateX(40%) translateY(150px) rotate(-90deg)'
-                                    }}>THE GROOM
-                                    </div>
-                                </div>
-                                <div className={'max-w-72'}>
-                                    <Image src={theGroom.src} width={240} height={320} alt={'The Groom'}/>
-                                </div>
+                            <div className={`text-8xl playfair-display mb-12 mt-8 text-gold text-center`}>&</div>
+                            <div className={`flex justify-center mb-4`}>
+                                <Image src={theGroom.src} width={240} height={320} style={{width: `80%`}} alt={'The Groom'}/>
                             </div>
-                            <div className={`flex flex-col items-end`}>
-                                <div className={`max-w-80 flex flex-col gap-2`}>
-                                    <div className={`cinzel-bold text-gold text-xl text-right`}>Dr (cand) Yohanes Osa
-                                        Hamara, S.H., M.H.
-                                    </div>
-                                    <div className={`text-right`}>Putra pertama dari Bapak Antonius Rio Tripurboyo & Ibu
-                                        Nur
-                                        Endah Sumiati (Menuk)
-                                    </div>
-                                    <div className={`text-right`}>Wangon, Banyumas</div>
-                                </div>
+                            <div className={`flex flex-col items-center gap-2`}>
+                                <div className={`cinzel-bold text-gold text-xl text-center`}>Dr (cand) Yohanes Osa Hamara, S.H., M.H.</div>
+                                <div className={`text-center`}>Putra pertama dari Bapak Antonius Rio Tripurboyo & Ibu Nur Endah Sumiati (Menuk)</div>
+                                <div className={`text-center`}>Wangon, Banyumas</div>
                             </div>
 
                         </section>
@@ -465,7 +436,7 @@ const InvitePage = () => {
                                 <div className={`text-3xl font-bold text-gold`}
                                      style={{fontFamily: 'Cinzel Bold'}}>Pesan
                                 </div>
-                                <div className={`w-full py-4 flex flex-col gap-4 bg-slate-950 rounded-lg`}>
+                                <div className={`w-full py-4 flex flex-col gap-4 bg-[#efe5cf] rounded-lg`}>
                                     {(!greetings) && (
                                         <div className={`flex justify-center`}>
                                             <SvgSpinners180Ring/>
@@ -473,13 +444,13 @@ const InvitePage = () => {
                                     )}
                                     {(greetings && greetings.length > 0) && (
                                         <div className={`px-4 overflow-y-auto max-h-[290px] message`}
-                                             style={{borderBottom: '1px solid #161627'}}>
+                                             style={{borderBottom: '1px solid #d2a339'}}>
                                             {greetings.map((g: any) => (
                                                 <>
                                                     <div key={g['_id']} className={`flex flex-col`}>
                                                         <div className={`flex justify-between items-center`}>
                                                             <div
-                                                                className={`text-amber-400 font-semibold`}>{g.name}</div>
+                                                                className={`text-black font-bold`}>{g.name}</div>
                                                             <div
                                                                 className={`text-xs text-slate-400`}>{dateStringify(g.createdAt)}</div>
                                                         </div>
@@ -494,7 +465,7 @@ const InvitePage = () => {
                                         <form onSubmit={handleSubmitMessage}>
                                             <div>
                                                 <input
-                                                    className={`w-full rounded px-3 py-2 text-gold font-semibold bg-[#10101b]`}
+                                                    className={`w-full rounded px-3 py-2 text-black font-bold bg-alabaster`}
                                                     ref={nameRef}
                                                     placeholder={'Nama'}
                                                     style={{outline: 'transparent'}}
@@ -502,7 +473,7 @@ const InvitePage = () => {
                                             </div>
                                             <div className={`mt-2 flex`}>
                                                 <textarea rows={1}
-                                                          className={`bg-[#10101b] w-full text-xs rounded-l pl-3 py-2`}
+                                                          className={`bg-alabaster w-full text-xs rounded-l pl-3 py-2`}
                                                           ref={noteRef}
                                                           placeholder={`Pesan`}
                                                           style={{
@@ -510,7 +481,7 @@ const InvitePage = () => {
                                                               outline: 'transparent'
                                                           }}></textarea>
                                                 <div
-                                                    className={`rounded-r bg-[#10101b] p-2 flex justify-end items-center`}>
+                                                    className={`rounded-r bg-alabaster p-2 flex justify-end items-center`}>
                                                     <button type={`submit`}
                                                             className={`rounded-full bg-gold w-8 h-8 text-chiblack hover:bg-amber-500`}>
                                                         <Image className={`ms-1`} height={24} width={24}
@@ -581,6 +552,11 @@ const InvitePage = () => {
                                 </div>
                             </div>
                         </section>
+
+                        <section className={`px-3 items-center my-10 flex flex-col`}>
+                            <Image src={OR3.src} width={100} height={20} alt={'gutter'} style={{width: '100%'}}/>
+                        </section>
+
                         <section id={`closing`} className={`px-6`}>
                             <div className={`flex justify-center text-center`}>Bersama dengan kasih Tuhan, kami berharap
                                 kehadiran dan doa dari Bapak/Ibu/Saudara/i pada momen penuh bahagia ini. Terima kasih
