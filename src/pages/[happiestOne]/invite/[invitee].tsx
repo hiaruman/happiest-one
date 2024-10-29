@@ -341,7 +341,7 @@ const InvitePage = () => {
                                 <Image src={theBride.src} width={240} height={320} style={{width: `80%`}} alt={'The Bride'}/>
                             </div>
                             <div className={`flex items-center flex-col gap-2`}>
-                                <div className={`cinzel-bold text-gold text-xl`}>Yosiana Dwi Saputri, A.Md.Farm</div>
+                                <div className={`cinzel-bold text-center text-gold text-xl`}>Yosiana Dwi Saputri, A.Md.Farm</div>
                                 <div>Putri kedua dari Bapak Priyoko & Ibu Sri Esti Rahayu</div>
                                 <div>Sumbang, Banyumas</div>
                             </div>
