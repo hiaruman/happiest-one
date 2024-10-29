@@ -9,11 +9,11 @@ import iconUp from "@/assets/svg/arrow-up.svg";
 import iconBCA from "@/assets/svg/bca-white.svg";
 import iconBRI from "@/assets/svg/bri-white.svg";
 import iconCopy from "@/assets/svg/copying.svg";
-import theBride from "@/assets/img/Yosi 2.png";
-import theGroom from "@/assets/img/Osa 2.png";
-import OR1 from "@/assets/svg/OR1.svg";
+import theBride from "@/assets/img/Yosi 3.png";
+import theGroom from "@/assets/img/Osa 3.png";
 import OR2 from "@/assets/svg/OR2.2.svg";
 import OR3 from "@/assets/svg/OR3.svg";
+import OR4 from "@/assets/svg/OR4.svg";
 import turntable from "@/assets/svg/turntable.svg";
 import vinyl from "@/assets/svg/vinyl.svg";
 import {SvgSpinners180Ring} from "@/shared/components/spinner";
@@ -324,8 +324,8 @@ const InvitePage = () => {
                     }}>
 
                         <section className={`px-3 items-center mt-16 mb-10 flex flex-col`}>
-                            <Image src={OR1.src} width={100} height={20} alt={'gutter'} style={{width: '75%'}}/>
-                            <div className={`cinzel-bold text-gold text-2xl mt-8`}>Salam Sejahtera</div>
+                            <Image src={OR4.src} width={100} height={20} alt={'gutter'} style={{width: '80%'}}/>
+                            <div className={`cinzel-bold text-gold text-2xl mt-10`}>Salam Sejahtera</div>
                         </section>
                         <section id={`couple`} className={`px-6`}>
                             <div className={`flex flex-col items-center mb-8 gap-2`}>
