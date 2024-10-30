@@ -397,7 +397,7 @@ const InvitePage = () => {
                     }}>
 
                         <section className={`px-3 items-center mt-10 mb-10 flex flex-col relative`}>
-                            <Image className={'absolute -top-6'} src={OR8.src} width={100} height={20} alt={'gutter'}
+                            <Image className={'absolute -top-4'} src={OR8.src} width={100} height={20} alt={'gutter'}
                                    style={{width: '80%'}}/>
                             <div className={`cinzel-bold text-gold text-3xl mt-32`}>Salam Sejahtera</div>
                         </section>
@@ -416,7 +416,7 @@ const InvitePage = () => {
                                        alt={'The Bride'}/>
                             </div>
                             <div className={`flex items-center flex-col gap-2`}>
-                                <div className={`ephesis font-bold text-center text-gold text-4xl`}>Yosiana Dwi Saputri,
+                                <div className={`ephesis font-bold text-center text-gold text-3xl`}>Yosiana Dwi Saputri,
                                     A.Md.Farm
                                 </div>
                                 <div>Putri kedua dari Bapak Priyoko & Ibu Sri Esti Rahayu</div>
@@ -428,7 +428,7 @@ const InvitePage = () => {
                                        alt={'The Groom'}/>
                             </div>
                             <div className={`flex flex-col items-center gap-2`}>
-                                <div className={`ephesis font-bold text-gold text-4xl text-center`}>Dr (cand) Yohanes
+                                <div className={`ephesis font-bold text-gold text-3xl text-center`}>Dr (cand) Yohanes
                                     Osa Hamara, S.H., M.H.
                                 </div>
                                 <div className={`text-center`}>Putra pertama dari Bapak Antonius Rio Tripurboyo & Ibu
@@ -519,7 +519,7 @@ const InvitePage = () => {
                                 <div><img src={OR6.src} className={'auto'}/></div>
                                 <div><img src={OR7.src}/></div>
                                 <div
-                                    className={`text-4xl text-gold italianno w-full text-center -mx-4`}>Memorizing
+                                    className={`text-3xl text-gold italianno w-full text-center -mx-4`}>Memorizing
                                     Our Moments
                                 </div>
                                 <div><img src={OR5.src}/></div>
@@ -539,8 +539,9 @@ const InvitePage = () => {
                                             ))}
                                         </div>
                                         <div>
-                                            <Image className={`mt-3 mb-2`} src={OR4.src} width={100} height={20}
-                                                   alt={'gutter'} style={{width: '100%'}}/>
+                                            {(idx < (gruppedGalleries.length-1)) && (
+                                                <Image className={`mt-3 mb-2`} src={OR4.src} width={100} height={20} alt={'gutter'} style={{width: '100%'}}/>
+                                            )}
                                         </div>
                                     </div>
                                 ))}
