@@ -24,7 +24,10 @@ import arrowRight from "@/assets/svg/arrow-right.svg";
 import {SvgSpinners180Ring} from "@/shared/components/spinner";
 import Image, {StaticImageData} from "next/image";
 import galleries from "@/core/constant/gallery";
-import gallery from "@/core/constant/gallery";
+import bgImage1 from "@/assets/img/bg-1-min.jpg";
+import bgImage2 from "@/assets/img/bg-2-min.jpg";
+import bgImage3 from "@/assets/img/bg-3-min.jpg";
+import Countdown from "@/shared/components/countdown";
 
 interface Gallery {
     order: number;
@@ -296,7 +299,6 @@ const InvitePage = () => {
             width: 0
         }
     });
-    console.log(OR5);
 
     const nextPreview = () => {
         let order = selectedGallery.order + 1;
@@ -310,6 +312,16 @@ const InvitePage = () => {
         if (order<0) order = galleries[galleries.length-1].order;
         setSelectedGallery(galleries.filter((x: any) => (x.order===order))[0]);
     }
+
+    const bgs = [bgImage1.src, bgImage2.src, bgImage3.src];
+    const [index, setIndex] = useState(0);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setIndex((prevIndex) => (prevIndex + 1) % bgs.length);
+        }, 3000);
+    }, []);
+
     return (
         <>
             <Head>
@@ -365,12 +377,12 @@ const InvitePage = () => {
                                                                                               setFlashMessage('');
                                                                                           }}>&#10005;</span><span className={`mr-4`}>{flashMessage}</span>
                     </div>
-                    <div className={`absolute bottom-16 left-6 cursor-pointer`} onClick={() => {
+                    <div className={`absolute bottom-16 left-6 cursor-pointer z-[100]`} onClick={() => {
                         toggleAudio();
                     }}>
                         <div className={'w-10 h-10'}>
                             <audio ref={audioRef} src={`/audio/song1.mp3`}/>
-                            <Image className={`absolute bottom-0 left-0 z-10`} src={turntable.src} width={40}
+                            <Image className={`absolute bottom-0 left-0 z-50`} src={turntable.src} width={40}
                                    height={40} style={{width: `40px`, height: `40px`}} alt={'Turntable'}/>
                             <Image id={`vinyl`} style={{transform: `rotate(${rad}deg)`, width: `40px`, height: `40px`}} src={vinyl.src} width={40}
                                    height={40} alt={'Vinyl'}/>
@@ -429,6 +441,54 @@ const InvitePage = () => {
                                     Karena itu, apa yang telah dipersatukan Allah, tidak boleh diceraikan manusia.
                                 </p>
                                 <div className={`cinzel-bold text-gold`}>MARKUS 10:6-9</div>
+                            </div>
+                        </section>
+
+                        <section id={`countdown`} className={`w-full h-[480px] relative`}>
+                            <div className={`w-full h-[480px] absolute top-0 left-0 flex justify-center items-center`} style={{backgroundColor: `rgba(210, 163, 57,0.75)`}}>
+                                <Countdown targetDate={`2024-11-24T11:00:00`} />
+                                {/*<div>*/}
+                                {/*    <div className={`text-center mt-8`}>The Wedding of</div>*/}
+                                {/*    <div className={`text-3xl flex gap-2 text-white justify-center items-baseline`}><span*/}
+                                {/*        className={`cinzel-bold`}>Yosi</span><span*/}
+                                {/*        className={`playfair-display text-4xl`}>&</span><span*/}
+                                {/*        className={`cinzel-bold`}>Osa</span>*/}
+                                {/*    </div>*/}
+                                {/*    <div className={`flex gap-3 justify-center`}>*/}
+                                {/*        <div className={'flex flex-col items-center gap-2'}>*/}
+                                {/*            <div className={`text-3xl font-bold px-2 py-3 rounded-lg`}*/}
+                                {/*                 style={{backgroundColor: `rgba(255, 255, 255, 0.5)`}}>00*/}
+                                {/*            </div>*/}
+                                {/*            <div>Hari</div>*/}
+                                {/*        </div>*/}
+                                {/*        <div className={'flex flex-col items-center gap-2'}>*/}
+                                {/*            <div className={`text-3xl font-bold px-2 py-3 rounded-lg`}*/}
+                                {/*                 style={{backgroundColor: `rgba(255, 255, 255, 0.5)`}}>00*/}
+                                {/*            </div>*/}
+                                {/*            <div>Jam</div>*/}
+                                {/*        </div>*/}
+                                {/*        <div className={'flex flex-col items-center gap-2'}>*/}
+                                {/*            <div className={`text-3xl font-bold px-2 py-3 rounded-lg`}*/}
+                                {/*                 style={{backgroundColor: `rgba(255, 255, 255, 0.5)`}}>00*/}
+                                {/*            </div>*/}
+                                {/*            <div>Menit</div>*/}
+                                {/*        </div>*/}
+                                {/*        <div className={'flex flex-col items-center gap-2'}>*/}
+                                {/*            <div className={`text-3xl font-bold px-2 py-3 rounded-lg`}*/}
+                                {/*                 style={{backgroundColor: `rgba(255, 255, 255, 0.5)`}}>00*/}
+                                {/*            </div>*/}
+                                {/*            <div>Detik</div>*/}
+                                {/*        </div>*/}
+                                {/*    </div>*/}
+                                {/*</div>*/}
+
+                            </div>
+                            <div className={`w-full h-full`} style={{
+                                backgroundImage: `url(${bgs[index]})`,
+                                backgroundPosition: `center`,
+                                backgroundSize: `480px`,
+                                transition: 'opacity 0.5s ease-in-out',
+                            }}>
                             </div>
                         </section>
 
