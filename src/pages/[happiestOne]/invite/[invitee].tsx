@@ -18,6 +18,8 @@ import turntable from "@/assets/svg/turntable.svg";
 import vinyl from "@/assets/svg/vinyl.svg";
 import {SvgSpinners180Ring} from "@/shared/components/spinner";
 import Image from "next/image";
+import galleries from "@/core/constant/gallery";
+import useViewport from "@/core/utils/useViewport";
 
 
 const InvitePage = () => {
@@ -272,12 +274,28 @@ const InvitePage = () => {
         }, 2500);
     }
 
+    const [isModal, setModal] = useState(false);
+
     return (
         <>
             <Head>
                 <title>{title}</title>
             </Head>
             <div className={`w-full h-full flex text-xs md:text-sm`}>
+
+                {/*     Modal Backdrop    */}
+                <div className={`absolute w-full h-full top-0 left-0 z-50 ${isModal ? '' : 'hidden'}`} style={{backgroundColor: `rgba(0,0,0,0.8)`, transition: `visibility 2s`}}>
+                    <div className={`absolute text-white text-2xl right-6 top-6 cursor-pointer`} onClick={() => {
+                        setModal(false);
+                    }}>&#10005;</div>
+                    <div className={`p-6 w-full h-full flex justify-center items-center`}>
+                        <div className={'absolute left-6'}>kiri</div>
+                        <Image className={'m-auto'} src={theGroom.src} width={200} height={300} alt={`Preview`} style={{width: `auto`, height: `auto`, maxWidth: `100%`,  maxHeight: `640px`}} />
+                        <div className={`absolute right-6`}>Kanan</div>
+                    </div>
+                </div>
+                {/*     End of Modal Backdrop    */}
+
                 <div className={`desktop-foreground relative`} style={{width: `calc(100% - 480px)`}}>
                     <img className={`w-full h-full object-cover object-right`} src={`/img/foreground.jpg`} alt={`Foreground`}/>
                     <div className={`w-2 h-full absolute right-0 bg-black opacity-50 top-0`}></div>
@@ -403,6 +421,15 @@ const InvitePage = () => {
                                 </div>
                             </a>
                         </div>
+
+                        {/*       GALLERY       */}
+                        <section id={`gallery`} className={`px-6`}>
+                            <div className={`flex flex-wrap gap-3`}>
+                                {galleries && galleries.map((g) => (
+                                    <img key={g.order} src={g.path} style={{width:`calc(50% - 0.375rem)`}} className={`rounded-lg cursor-pointer`} />
+                                ))}
+                            </div>
+                        </section>
 
                         {/*    RSVP    */}
                         <section>
