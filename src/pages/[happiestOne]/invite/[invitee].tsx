@@ -18,6 +18,8 @@ import OR5 from "@/assets/svg/OR5.svg";
 import OR6 from "@/assets/svg/OR6.svg";
 import OR7 from "@/assets/svg/OR7.svg";
 import OR8 from "@/assets/svg/OR8.svg";
+import OR9 from "@/assets/svg/OR9.svg";
+import OR10 from "@/assets/svg/OR10.svg";
 import turntable from "@/assets/svg/turntable.svg";
 import vinyl from "@/assets/svg/vinyl.svg";
 import arrowLeft from "@/assets/svg/arrow-left.svg";
@@ -381,19 +383,34 @@ const InvitePage = () => {
                     style={{height: '100vh'}}>
 
                     {/*       COVER       */}
-                    <div className={`top-cover ${isOpen ? 'opened' : ''} absolute z-[103] text-gold top-0 w-full bg-alabaster rounded-b-3xl shadow-lg flex flex-col gap-6 items-center justify-end p-6`} style={{height: `calc(50vh + 6rem)`}}>
-                        <div>Kepada yang kami hormati Bapak/Ibu/Saudara/i</div>
-                        <div>{invitee}</div>
-                        <button
-                            onClick={() => {
-                                setOpen(true);
-                                toggleAudio();
-                            }}
-                            className={`text-gold rounded-lg py-2 px-4 hover:bg-gold hover:text-alabaster`} style={{border : `1px solid #d2a339`}}>
-                            Buka Undangan
-                        </button>
+                    <div className={`top-cover ${isOpen ? 'opened' : ''} absolute z-[103] text-gold top-0 w-full bg-yankblue rounded-b-3xl shadow-lg`} style={{height: `calc(50vh + 6rem)`}}>
+                        <div>
+                            <Image className={'absolute top-0 left-0'} src={OR9.src} width={100} height={20} alt={'Top Ornament'} style={{width: `100%`, height: `auto`}}/>
+                            <Image className={'absolute bottom-2 left-0'} src={OR10.src} width={100} height={20} alt={'Bottom Ornament'} style={{width: `100%`, height: `auto`}}/>
+                        </div>
+                        <div className={`absolute z-20 top-0 left-0 w-full h-full flex flex-col gap-3 justify-end items-center px-6 py-12`}>
+                            <div>The Wedding of</div>
+                            <div className={`embossed-gold-text flex gap-2 items-baseline`}>
+                                <span className={`cinzel-bold text-3xl`}>Yosi</span>
+                                <span className={`playfair-display text-4xl`}>&</span>
+                                <span className={`cinzel-bold text-3xl`}>Osa</span>
+                            </div>
+                            <div className={`text-4xl playfair-display flex items-center mb-8`}>
+                                24&#183;11&#183;24
+                            </div>
+                            <div>Kepada yang kami hormati Bapak/Ibu/Saudara/i</div>
+                            <div>{invitee}</div>
+                            <button
+                                onClick={() => {
+                                    setOpen(true);
+                                    toggleAudio();
+                                }}
+                                className={`text-gold rounded-lg py-2 px-4 hover:bg-gold hover:text-alabaster`} style={{border : `1px solid #d2a339`}}>
+                                Buka Undangan
+                            </button>
+                        </div>
                     </div>
-                    <div className={`bottom-cover ${isOpen ? 'opened' : ''} absolute z-[102] bottom-0 w-full bg-alabaster rounded-t-3xl`} style={{height: `calc(50vh + 6rem)`}}></div>
+                    <div className={`bottom-cover ${isOpen ? 'opened' : ''} absolute z-[102] bottom-0 w-full bg-yankblue rounded-t-3xl`} style={{height: `calc(50vh + 6rem)`}}></div>
                     {/*   END of COVER    */}
 
                     <div className={`${flashMessage ? 'flash-message' : 'hidden'}`}><span className={`p-2`}

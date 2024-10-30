@@ -14,7 +14,8 @@ const config: Config = {
         gold: "#d2a339",
         chiblack: "#121212",
         brown: "#5a400f",
-        alabaster: "#f3eee1"
+        alabaster: "#f3eee1",
+        yankblue: "#202E44"
       },
     },
   },
