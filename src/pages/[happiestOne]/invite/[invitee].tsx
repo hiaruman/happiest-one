@@ -9,21 +9,22 @@ import iconUp from "@/assets/svg/arrow-up.svg";
 import iconBCA from "@/assets/svg/bca-white.svg";
 import iconBRI from "@/assets/svg/bri-white.svg";
 import iconCopy from "@/assets/svg/copying.svg";
-import theBride from "@/assets/img/Yosi 5.png";
-import theGroom from "@/assets/img/Osa 5.png";
+import theBride from "@/assets/img/Yosi 6.png";
+import theGroom from "@/assets/img/Osa 6.png";
 import OR2 from "@/assets/svg/OR2.2.svg";
 import OR3 from "@/assets/svg/OR3.svg";
 import OR4 from "@/assets/svg/OR4.svg";
 import OR5 from "@/assets/svg/OR5.svg";
 import OR6 from "@/assets/svg/OR6.svg";
 import OR7 from "@/assets/svg/OR7.svg";
+import OR8 from "@/assets/svg/OR8.svg";
 import turntable from "@/assets/svg/turntable.svg";
 import vinyl from "@/assets/svg/vinyl.svg";
 import arrowLeft from "@/assets/svg/arrow-left.svg";
 import arrowRight from "@/assets/svg/arrow-right.svg";
 import {SvgSpinners180Ring} from "@/shared/components/spinner";
 import Image, {StaticImageData} from "next/image";
-import galleries from "@/core/constant/gallery";
+import {galleries, groupIntoPairs} from "@/core/constant/galleries";
 import bgImage1 from "@/assets/img/bg-1-min.jpg";
 import bgImage2 from "@/assets/img/bg-2-min.jpg";
 import bgImage3 from "@/assets/img/bg-3-min.jpg";
@@ -207,8 +208,6 @@ const InvitePage = () => {
 
             if (response.ok) {
                 const result = await response.json();
-                console.log('Result', result);
-                console.log(name, note);
                 nameRef.current ? (nameRef.current as any).value = '' : '';
                 noteRef.current ? (noteRef.current as any).value = '' : '';
                 setMessage('Greetings successfully updated');
@@ -316,11 +315,13 @@ const InvitePage = () => {
     const bgs = [bgImage1.src, bgImage2.src, bgImage3.src];
     const [index, setIndex] = useState(0);
 
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setIndex((prevIndex) => (prevIndex + 1) % bgs.length);
-        }, 3000);
-    }, []);
+    // useEffect(() => {
+    //     const interval = setInterval(() => {
+    //         // setIndex((prevIndex) => (prevIndex + 1) % bgs.length);
+    //     }, 3000);
+    // }, [index]);
+
+    const gruppedGalleries = groupIntoPairs(galleries);
 
     return (
         <>
@@ -395,11 +396,12 @@ const InvitePage = () => {
                         backgroundColor: `#f3eee1`
                     }}>
 
-                        <section className={`px-3 items-center mt-16 mb-10 flex flex-col`}>
-                            <Image src={OR4.src} width={100} height={20} alt={'gutter'} style={{width: '80%'}}/>
-                            <div className={`cinzel-bold text-gold text-2xl mt-10`}>Salam Sejahtera</div>
+                        <section className={`px-3 items-center mt-10 mb-10 flex flex-col relative`}>
+                            <Image className={'absolute -top-10'} src={OR8.src} width={100} height={20} alt={'gutter'}
+                                   style={{width: '80%'}}/>
+                            <div className={`cinzel-bold text-gold text-3xl mt-32`}>Salam Sejahtera</div>
                         </section>
-                        <section id={`couple`} className={`px-6`}>
+                        <section id={`couple`} className={`px-6 pb-16`}>
                             <div className={`flex flex-col items-center mb-8 gap-2`}>
                                 <p className={`text-center leading-8`}>
                                     Tuhan membuat segala sesuatu indah pada waktu-Nya.<br/>
@@ -410,29 +412,91 @@ const InvitePage = () => {
                                 </p>
                             </div>
                             <div className={`flex justify-center mb-4`}>
-                                <Image src={theBride.src} width={240} height={320} style={{width: `80%`}} alt={'The Bride'}/>
+                                <Image src={theBride.src} width={240} height={320} style={{width: `80%`}}
+                                       alt={'The Bride'}/>
                             </div>
                             <div className={`flex items-center flex-col gap-2`}>
-                                <div className={`cinzel-bold text-center text-gold text-xl`}>Yosiana Dwi Saputri, A.Md.Farm</div>
+                                <div className={`ephesis font-bold text-center text-gold text-4xl`}>Yosiana Dwi Saputri,
+                                    A.Md.Farm
+                                </div>
                                 <div>Putri kedua dari Bapak Priyoko & Ibu Sri Esti Rahayu</div>
                                 <div>Sumbang, Banyumas</div>
                             </div>
                             <div className={`text-8xl playfair-display mb-12 mt-8 text-gold text-center`}>&</div>
                             <div className={`flex justify-center mb-4`}>
-                                <Image src={theGroom.src} width={240} height={320} style={{width: `80%`}} alt={'The Groom'}/>
+                                <Image src={theGroom.src} width={240} height={320} style={{width: `80%`}}
+                                       alt={'The Groom'}/>
                             </div>
                             <div className={`flex flex-col items-center gap-2`}>
-                                <div className={`cinzel-bold text-gold text-xl text-center`}>Dr (cand) Yohanes Osa Hamara, S.H., M.H.</div>
-                                <div className={`text-center`}>Putra pertama dari Bapak Antonius Rio Tripurboyo & Ibu Nur Endah Sumiati (Menuk)</div>
+                                <div className={`ephesis font-bold text-gold text-4xl text-center`}>Dr (cand) Yohanes
+                                    Osa Hamara, S.H., M.H.
+                                </div>
+                                <div className={`text-center`}>Putra pertama dari Bapak Antonius Rio Tripurboyo & Ibu
+                                    Nur Endah Sumiati (Menuk)
+                                </div>
                                 <div className={`text-center`}>Wangon, Banyumas</div>
                             </div>
 
                         </section>
 
+                        <section id={`countdown`} className={`w-full h-[480px] relative`}>
+                            <div className={`w-full h-[480px] absolute top-0 left-0 flex justify-center items-end pb-6`}
+                                 style={{backgroundColor: `rgba(0, 0, 0, 0.25)`}}>
+                                <Countdown targetDate={`2024-11-24T11:00:00`}/>
+                            </div>
+                            <div className={`w-full h-full`} style={{
+                                backgroundImage: `url(${bgs[index]})`,
+                                backgroundPosition: `center`,
+                                backgroundSize: `480px`,
+                                transition: 'opacity 0.5s ease-in-out',
+                            }}>
+                            </div>
+                        </section>
+
+                        <section id={`events`} className={`px-6 py-16 flex flex-col gap-8`}>
+                            <div className={`text-center`}>Yang akan diselenggarakan pada hari</div>
+                            <div className={'flex gap-2 items-center cinzel-bold text-gold'}>
+                                <div className={'w-full flex justify-center text-3xl'}>MINGGU</div>
+                                <div className={'w-full flex justify-center text-4xl font-bold border-gold border-l-2 border-r-2'}>24</div>
+                                <div className={'w-full flex flex-col items-center text-sm'}>
+                                    <div>NOVEMBER</div>
+                                    <div>2024</div>
+                                </div>
+                            </div>
+                            <div className={`flex justify-center gap-3`}>
+                                <div className={`w-full flex flex-col items-center justify-between gap-6`}>
+                                    <div className={`flex flex-col items-center gap-4`}>
+                                        <div className={`cinzel-bold text-gold text-xl text-center`}>PEMBERKATAN</div>
+                                        <div className={`text-center`}>11.00 WIB s.d. selesai</div>
+                                        <div className={`text-center`}>GBI Shalom Wangon <br/>(Khusus Keluarga & Jemaat Gereja)</div>
+                                    </div>
+                                    <button className={`px-3 py-2 border-2 text-gold border-gold rounded-lg`}>GOOGLE MAPS</button>
+                                </div>
+                                <div className={`border-l-2 border-gold`}></div>
+                                <div className={`w-full flex flex-col items-center gap-6`}>
+                                    <div className={`flex flex-col items-center gap-4`}>
+                                        <div className={`cinzel-bold text-xl text-center text-gold`}>RESEPSI</div>
+                                        <div className={`text-center`}>18.00 WIB s.d. 21.00 WIB</div>
+                                        <div className={`text-center`}>Convention Hall Putra Sang Fajar <br/>(Pintu Timur
+                                            depan gedung DPRD Kabupaten Banyumas)<br/>
+                                            Komplek Menara Teratai Purwokerto
+                                        </div>
+                                    </div>
+                                    <button className={`px-3 py-2 border-2 text-gold border-gold rounded-lg`}>GOOGLE MAPS</button>
+
+                                </div>
+                            </div>
+                        </section>
+
+                        <section className={`px-6`}>
+                                <Image className={`mt-3 mb-2`} src={OR4.src} width={100} height={20}
+                                       alt={'gutter'} style={{width: '100%'}}/>
+                        </section>
+
                         <section className={`my-20`}>
                             <div className={`px-6 flex flex-col items-center gap-6`}>
-                                <p className={`text-center leading-8`}>
-                                    Sebab pada awal dunia, Allah menjadikan mereka laki-laki dan perempuan, sebab itu
+                                <p className={`text-center leading-8 text-[#908f8e]`}>
+                                Sebab pada awal dunia, Allah menjadikan mereka laki-laki dan perempuan, sebab itu
                                     laki-laki akan meninggalkan ayahnya dan ibunya dan bersatu dengan isterinya,
                                     sehingga keduanya itu menjadi satu daging.
                                     <br/>
@@ -444,85 +508,38 @@ const InvitePage = () => {
                             </div>
                         </section>
 
-                        <section id={`countdown`} className={`w-full h-[480px] relative`}>
-                            <div className={`w-full h-[480px] absolute top-0 left-0 flex justify-center items-center`} style={{backgroundColor: `rgba(210, 163, 57,0.75)`}}>
-                                <Countdown targetDate={`2024-11-24T11:00:00`} />
-                                {/*<div>*/}
-                                {/*    <div className={`text-center mt-8`}>The Wedding of</div>*/}
-                                {/*    <div className={`text-3xl flex gap-2 text-white justify-center items-baseline`}><span*/}
-                                {/*        className={`cinzel-bold`}>Yosi</span><span*/}
-                                {/*        className={`playfair-display text-4xl`}>&</span><span*/}
-                                {/*        className={`cinzel-bold`}>Osa</span>*/}
-                                {/*    </div>*/}
-                                {/*    <div className={`flex gap-3 justify-center`}>*/}
-                                {/*        <div className={'flex flex-col items-center gap-2'}>*/}
-                                {/*            <div className={`text-3xl font-bold px-2 py-3 rounded-lg`}*/}
-                                {/*                 style={{backgroundColor: `rgba(255, 255, 255, 0.5)`}}>00*/}
-                                {/*            </div>*/}
-                                {/*            <div>Hari</div>*/}
-                                {/*        </div>*/}
-                                {/*        <div className={'flex flex-col items-center gap-2'}>*/}
-                                {/*            <div className={`text-3xl font-bold px-2 py-3 rounded-lg`}*/}
-                                {/*                 style={{backgroundColor: `rgba(255, 255, 255, 0.5)`}}>00*/}
-                                {/*            </div>*/}
-                                {/*            <div>Jam</div>*/}
-                                {/*        </div>*/}
-                                {/*        <div className={'flex flex-col items-center gap-2'}>*/}
-                                {/*            <div className={`text-3xl font-bold px-2 py-3 rounded-lg`}*/}
-                                {/*                 style={{backgroundColor: `rgba(255, 255, 255, 0.5)`}}>00*/}
-                                {/*            </div>*/}
-                                {/*            <div>Menit</div>*/}
-                                {/*        </div>*/}
-                                {/*        <div className={'flex flex-col items-center gap-2'}>*/}
-                                {/*            <div className={`text-3xl font-bold px-2 py-3 rounded-lg`}*/}
-                                {/*                 style={{backgroundColor: `rgba(255, 255, 255, 0.5)`}}>00*/}
-                                {/*            </div>*/}
-                                {/*            <div>Detik</div>*/}
-                                {/*        </div>*/}
-                                {/*    </div>*/}
-                                {/*</div>*/}
 
-                            </div>
-                            <div className={`w-full h-full`} style={{
-                                backgroundImage: `url(${bgs[index]})`,
-                                backgroundPosition: `center`,
-                                backgroundSize: `480px`,
-                                transition: 'opacity 0.5s ease-in-out',
-                            }}>
-                            </div>
-                        </section>
+                        {/*<div className="mt-20px text-white ibm-plex-sans fs-12 text-center px-10px">Google Maps</div>*/}
 
-                        <div className="mt-20px text-white ibm-plex-sans fs-12 text-center px-10px">Google Maps</div>
+                        {/*<div className="p-6">*/}
+                        {/*    <div className={`w-full h-[240px] bg-[#f8f7f7] rounded-t-lg`}>*/}
+                        {/*        <iframe className={`w-full rounded-t-lg`}*/}
+                        {/*                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d247.21969831235202!2d109.05636349373563!3d-7.518647191774238!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e656599ddda4d47%3A0xb6906e33f67bab19!2sGBI%20Shalom%20Wangon!5e0!3m2!1sid!2sid!4v1729760721809!5m2!1sid!2sid"*/}
+                        {/*                allowFullScreen={true} loading="lazy" width="480" height="240"*/}
+                        {/*                referrerPolicy="no-referrer-when-downgrade"></iframe>*/}
+                        {/*    </div>*/}
+                        {/*    <a href="https://maps.app.goo.gl/tBtovwdC8mfLFfjr6" target="_blank">*/}
+                        {/*        <div className={`w-full py-3 rounded-b-lg bg-[#f8f7f7] text-slate-700 text-center`}>Buka*/}
+                        {/*            peta*/}
+                        {/*        </div>*/}
+                        {/*    </a>*/}
+                        {/*</div>*/}
 
-                        <div className="p-6">
-                            <div className={`w-full h-[240px] bg-[#f8f7f7] rounded-t-lg`}>
-                                <iframe className={`w-full rounded-t-lg`}
-                                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d247.21969831235202!2d109.05636349373563!3d-7.518647191774238!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e656599ddda4d47%3A0xb6906e33f67bab19!2sGBI%20Shalom%20Wangon!5e0!3m2!1sid!2sid!4v1729760721809!5m2!1sid!2sid"
-                                        allowFullScreen={true} loading="lazy" width="480" height="240"
-                                        referrerPolicy="no-referrer-when-downgrade"></iframe>
-                            </div>
-                            <a href="https://maps.app.goo.gl/tBtovwdC8mfLFfjr6" target="_blank">
-                                <div className={`w-full py-3 rounded-b-lg bg-[#f8f7f7] text-slate-700 text-center`}>Buka
-                                    peta
-                                </div>
-                            </a>
-                        </div>
+                        {/*<div className="mt-20px text-white ibm-plex-sans fs-12 text-center px-10px">Google Maps</div>*/}
 
-                        <div className="mt-20px text-white ibm-plex-sans fs-12 text-center px-10px">Google Maps</div>
-
-                        <div className="p-6">
-                            <div className={`w-full h-[240px] bg-[#f8f7f7] rounded-t-lg`}>
-                                <iframe className={`w-full rounded-t-lg`}
-                                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d989.075867522704!2d109.23294622006077!3d-7.4316319059326394!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e655fcbe5ab4811%3A0xf10047ad2dcd603a!2sConvention%20Hall%20Komplek%20Menara%20Pandang!5e0!3m2!1sid!2sid!4v1729759824849!5m2!1sid!2sid"
-                                        allowFullScreen={true} loading="lazy" width="480" height="240"
-                                        referrerPolicy="no-referrer-when-downgrade"></iframe>
-                            </div>
-                            <a href="https://maps.app.goo.gl/Pp4d2MacVDEozaJk8" target="_blank">
-                                <div className={`w-full py-3 rounded-b-lg bg-[#f8f7f7] text-slate-700 text-center`}>Buka
-                                    peta
-                                </div>
-                            </a>
-                        </div>
+                        {/*<div className="p-6">*/}
+                        {/*    <div className={`w-full h-[240px] bg-[#f8f7f7] rounded-t-lg`}>*/}
+                        {/*        <iframe className={`w-full rounded-t-lg`}*/}
+                        {/*                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d989.075867522704!2d109.23294622006077!3d-7.4316319059326394!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e655fcbe5ab4811%3A0xf10047ad2dcd603a!2sConvention%20Hall%20Komplek%20Menara%20Pandang!5e0!3m2!1sid!2sid!4v1729759824849!5m2!1sid!2sid"*/}
+                        {/*                allowFullScreen={true} loading="lazy" width="480" height="240"*/}
+                        {/*                referrerPolicy="no-referrer-when-downgrade"></iframe>*/}
+                        {/*    </div>*/}
+                        {/*    <a href="https://maps.app.goo.gl/Pp4d2MacVDEozaJk8" target="_blank">*/}
+                        {/*        <div className={`w-full py-3 rounded-b-lg bg-[#f8f7f7] text-slate-700 text-center`}>Buka*/}
+                        {/*            peta*/}
+                        {/*        </div>*/}
+                        {/*    </a>*/}
+                        {/*</div>*/}
 
                         {/*       GALLERY       */}
                         <section id={`gallery`} className={`px-6 mb-6`}>
@@ -530,17 +547,44 @@ const InvitePage = () => {
                                 <div><img src={OR5.src}/></div>
                                 <div><img src={OR6.src} className={'auto'}/></div>
                                 <div><img src={OR7.src}/></div>
-                                <div className={`text-3xl font-bold text-gold cinzel-bold w-full text-center -mx-4`}>Little Piece of Us</div>
+                                <div
+                                    className={`text-4xl font-bold text-gold italianno w-full text-center -mx-4`}>Memorizing
+                                    Our Moments
+                                </div>
                                 <div><img src={OR5.src}/></div>
                                 <div><img src={OR6.src} className={'auto'}/></div>
                                 <div><img src={OR7.src}/></div>
                             </div>
-                            <div className={`flex flex-wrap gap-3`}>
-                                {galleries && galleries.map((g) => (
-                                    <img key={g.order} src={g.path} style={{width:`calc(50% - 0.375rem)`}} onClick={() => {
-                                        setModal(true); setSelectedGallery(g);
-                                    }} className={`rounded-lg cursor-pointer`} />
+                            <div className={`flex flex-col gap-3`}>
+                                {gruppedGalleries && gruppedGalleries.map((gs, idx) => (
+                                    <div key={idx}>
+                                        <div className={`flex flex-wrap gap-3`}>
+                                            {gs.map((g) => (
+                                                <img key={g.order} src={g.path} style={{width: `calc(50% - 0.375rem)`}}
+                                                     onClick={() => {
+                                                         setModal(true);
+                                                         setSelectedGallery(g);
+                                                     }} className={`rounded-lg cursor-pointer`}/>
+                                            ))}
+                                        </div>
+                                        <div>
+                                            <Image className={`mt-3 mb-2`} src={OR4.src} width={100} height={20}
+                                                   alt={'gutter'} style={{width: '100%'}}/>
+                                        </div>
+                                    </div>
                                 ))}
+                            </div>
+                            <div className={`flex my-6 items-center justify-between`}>
+                                <div><img src={OR5.src}/></div>
+                                <div><img src={OR6.src} className={'auto'}/></div>
+                                <div><img src={OR7.src}/></div>
+                                <div
+                                    className={`text-sm font-bold text-brown text-center py-1 px-3 rounded-lg cursor-pointer`}
+                                    style={{border: `1px solid #5a400f`}}>See More
+                                </div>
+                                <div><img src={OR5.src}/></div>
+                                <div><img src={OR6.src} className={'auto'}/></div>
+                                <div><img src={OR7.src}/></div>
                             </div>
                         </section>
 

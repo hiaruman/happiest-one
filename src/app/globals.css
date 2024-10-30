@@ -1,5 +1,12 @@
 @import url('https://fonts.cdnfonts.com/css/inclusive-sans-2');
 @import url('https://fonts.cdnfonts.com/css/freebooter-script');
+@import url('https://fonts.cdnfonts.com/css/ephesis');
+@import url('https://fonts.cdnfonts.com/css/tangerine');
+@import url('https://fonts.cdnfonts.com/css/carattere');
+@import url('https://fonts.cdnfonts.com/css/italianno');
+@import url('https://fonts.cdnfonts.com/css/monsieur-la-doulaise');
+@import url('https://fonts.cdnfonts.com/css/passions-conflict');
+@import url('https://fonts.cdnfonts.com/css/ruthie');
 
 @tailwind base;
 @tailwind components;
@@ -96,6 +103,34 @@ body {
 
   .freebooster-script {
     font-family: 'Freebooter Script', sans-serif;
+  }
+
+  .ephesis {
+    font-family: 'Ephesis', sans-serif;
+  }
+
+  .tangerine {
+    font-family: 'Tangerine', sans-serif;
+  }
+
+  .carattere {
+    font-family: 'Carattere', sans-serif;
+  }
+
+  .italianno {
+    font-family: 'Italianno', sans-serif;
+  }
+
+  .monsieur-la-doulaise {
+    font-family: 'Monsieur La Doulaise', sans-serif;
+  }
+
+  .passions-conflict {
+    font-family: 'Passions Conflict', sans-serif;
+  }
+
+  .ruthie {
+    font-family: 'Ruthie', sans-serif;
   }
 }
 

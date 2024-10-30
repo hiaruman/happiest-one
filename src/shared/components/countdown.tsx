@@ -49,7 +49,7 @@ const Countdown: React.FC<CountdownProps> = ({ targetDate }) => {
 
     return (
         <div>
-            <div className={`text-center mt-8`}>The Wedding of</div>
+            <div className={`text-center mt-8 text-white`}>The Wedding of</div>
             <div className={`text-3xl flex gap-2 text-white justify-center items-baseline`}><span
                 className={`cinzel-bold`}>Yosi</span><span
                 className={`playfair-display text-4xl`}>&</span><span
@@ -57,28 +57,28 @@ const Countdown: React.FC<CountdownProps> = ({ targetDate }) => {
             </div>
             <div className={`flex gap-3 justify-center`}>
                 <div className={'flex flex-col items-center gap-2'}>
-                    <div className={`text-3xl font-bold px-2 py-3 rounded-lg`}
-                         style={{backgroundColor: `rgba(255, 255, 255, 0.5)`}}>{timeLeft.days}
+                    <div className={`text-3xl text-white font-bold px-2 py-3 rounded-lg`}
+                         style={{backgroundColor: `rgba(0, 0, 0, 0.35)`}}>{timeLeft.days}
                     </div>
-                    <div>Hari</div>
+                    <div className={`text-white font-bold text-sm`}>Hari</div>
                 </div>
                 <div className={'flex flex-col items-center gap-2'}>
-                    <div className={`text-3xl font-bold px-2 py-3 rounded-lg`}
-                         style={{backgroundColor: `rgba(255, 255, 255, 0.5)`}}>{timeLeft.hours}
+                    <div className={`text-3xl text-white font-bold px-2 py-3 rounded-lg`}
+                         style={{backgroundColor: `rgba(0, 0, 0, 0.35)`}}>{timeLeft.hours}
                     </div>
-                    <div>Jam</div>
+                    <div className={`text-white font-bold text-sm`}>Jam</div>
                 </div>
                 <div className={'flex flex-col items-center gap-2'}>
-                    <div className={`text-3xl font-bold px-2 py-3 rounded-lg`}
-                         style={{backgroundColor: `rgba(255, 255, 255, 0.5)`}}>{timeLeft.minutes}
+                    <div className={`text-3xl text-white font-bold px-2 py-3 rounded-lg`}
+                         style={{backgroundColor: `rgba(0, 0, 0, 0.35)`}}>{timeLeft.minutes}
                     </div>
-                    <div>Menit</div>
+                    <div className={`text-white font-bold text-sm`}>Menit</div>
                 </div>
                 <div className={'flex flex-col items-center gap-2'}>
-                    <div className={`text-3xl font-bold px-2 py-3 rounded-lg`}
-                         style={{backgroundColor: `rgba(255, 255, 255, 0.5)`}}>{timeLeft.seconds}
+                    <div className={`text-3xl text-white font-bold px-2 py-3 rounded-lg`}
+                         style={{backgroundColor: `rgba(0, 0, 0, 0.35)`}}>{timeLeft.seconds}
                     </div>
-                    <div>Detik</div>
+                    <div className={`text-white font-bold text-sm`}>Detik</div>
                 </div>
             </div>
         </div>

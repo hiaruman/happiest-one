@@ -48,9 +48,10 @@ import image47 from "@/assets/img/optimized/47-min.jpg";
 import image48 from "@/assets/img/optimized/48-min.jpg";
 import image49 from "@/assets/img/optimized/49-min.jpg";
 import image50 from "@/assets/img/optimized/50-min.jpg";
+import {StaticImageData} from "next/image";
 
 
-const galleries = [
+export const galleries = [
     { order:0, path: image01.src, module: image01},
     { order:1, path: image02.src, module: image02},
     { order:2, path: image03.src, module: image03},
@@ -103,4 +104,19 @@ const galleries = [
     { order:49, path: image50.src, module: image50},
 ]
 
-export default galleries
+
+interface Gallery {
+    order: number,
+    path: string,
+    module: StaticImageData
+}
+
+export const groupIntoPairs = (array: Gallery[]) => {
+    const groupedArray = [];
+    for (let i = 0; i < array.length; i += 2) {
+        groupedArray.push(array.slice(i, i + 2));
+    }
+    return groupedArray;
+};
+
+export default {groupIntoPairs, galleries}
