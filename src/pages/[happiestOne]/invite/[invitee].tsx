@@ -14,13 +14,23 @@ import theGroom from "@/assets/img/Osa 5.png";
 import OR2 from "@/assets/svg/OR2.2.svg";
 import OR3 from "@/assets/svg/OR3.svg";
 import OR4 from "@/assets/svg/OR4.svg";
+import OR5 from "@/assets/svg/OR5.svg";
+import OR6 from "@/assets/svg/OR6.svg";
+import OR7 from "@/assets/svg/OR7.svg";
 import turntable from "@/assets/svg/turntable.svg";
 import vinyl from "@/assets/svg/vinyl.svg";
+import arrowLeft from "@/assets/svg/arrow-left.svg";
+import arrowRight from "@/assets/svg/arrow-right.svg";
 import {SvgSpinners180Ring} from "@/shared/components/spinner";
-import Image from "next/image";
+import Image, {StaticImageData} from "next/image";
 import galleries from "@/core/constant/gallery";
-import useViewport from "@/core/utils/useViewport";
+import gallery from "@/core/constant/gallery";
 
+interface Gallery {
+    order: number;
+    path: string;
+    module: StaticImageData;
+}
 
 const InvitePage = () => {
     const title: string = "The Happiest One - Osa & Yosi";
@@ -275,7 +285,31 @@ const InvitePage = () => {
     }
 
     const [isModal, setModal] = useState(false);
+    const [selectedGallery, setSelectedGallery] = useState<Gallery>({
+        order: 0,
+        path:'',
+        module:{
+            src: '',
+            blurWidth:0,
+            blurHeight:0,
+            height:0,
+            width: 0
+        }
+    });
+    console.log(OR5);
 
+    const nextPreview = () => {
+        let order = selectedGallery.order + 1;
+        const lastOrder = galleries[galleries.length-1].order;
+        if (order>lastOrder) order = 0;
+        setSelectedGallery(galleries.filter((x: any) => (x.order===order))[0]);
+    }
+
+    const previousPreview = () => {
+        let order = selectedGallery.order - 1;
+        if (order<0) order = galleries[galleries.length-1].order;
+        setSelectedGallery(galleries.filter((x: any) => (x.order===order))[0]);
+    }
     return (
         <>
             <Head>
@@ -289,9 +323,17 @@ const InvitePage = () => {
                         setModal(false);
                     }}>&#10005;</div>
                     <div className={`p-6 w-full h-full flex justify-center items-center`}>
-                        <div className={'absolute left-6'}>kiri</div>
-                        <Image className={'m-auto'} src={theGroom.src} width={200} height={300} alt={`Preview`} style={{width: `auto`, height: `auto`, maxWidth: `100%`,  maxHeight: `640px`}} />
-                        <div className={`absolute right-6`}>Kanan</div>
+                        <div className={'absolute left-6 rounded-full cursor-pointer'} onClick={() => {
+                            previousPreview();
+                        }} style={{backgroundColor: `rgba(255,255,255, 0.5)`}}>
+                            <Image src={arrowLeft.src} alt={'left'} width={24} height={24}/>
+                        </div>
+                        <img className={'m-auto'} src={selectedGallery.module.src} alt={`Preview`} style={{width: `${((selectedGallery.module.width>selectedGallery.module.height) && (window.innerHeight>selectedGallery.module.height)) ? 'calc(100vw - 4.5rem)' : 'auto'} `, height: `${((selectedGallery.module.width<selectedGallery.module.height) && (window.innerWidth>selectedGallery.module.width)) ? 'calc(100vh - 6rem)' : 'auto'} `, maxWidth: `calc(100vw - 4.5rem)`,  maxHeight: `calc(100vh - 6rem)`}} />
+                        <div className={`absolute right-6 rounded-full cursor-pointer`} onClick={() => {
+                            nextPreview();
+                        }} style={{backgroundColor: `rgba(255,255,255, 0.5)`}}>
+                            <Image src={arrowRight.src} alt={'right'} width={24} height={24}/>
+                        </div>
                     </div>
                 </div>
                 {/*     End of Modal Backdrop    */}
@@ -423,10 +465,21 @@ const InvitePage = () => {
                         </div>
 
                         {/*       GALLERY       */}
-                        <section id={`gallery`} className={`px-6`}>
+                        <section id={`gallery`} className={`px-6 mb-6`}>
+                            <div className={`flex my-6 items-center justify-between`}>
+                                <div><img src={OR5.src}/></div>
+                                <div><img src={OR6.src} className={'auto'}/></div>
+                                <div><img src={OR7.src}/></div>
+                                <div className={`text-3xl font-bold text-gold cinzel-bold w-full text-center -mx-4`}>Little Piece of Us</div>
+                                <div><img src={OR5.src}/></div>
+                                <div><img src={OR6.src} className={'auto'}/></div>
+                                <div><img src={OR7.src}/></div>
+                            </div>
                             <div className={`flex flex-wrap gap-3`}>
                                 {galleries && galleries.map((g) => (
-                                    <img key={g.order} src={g.path} style={{width:`calc(50% - 0.375rem)`}} className={`rounded-lg cursor-pointer`} />
+                                    <img key={g.order} src={g.path} style={{width:`calc(50% - 0.375rem)`}} onClick={() => {
+                                        setModal(true); setSelectedGallery(g);
+                                    }} className={`rounded-lg cursor-pointer`} />
                                 ))}
                             </div>
                         </section>
@@ -434,7 +487,7 @@ const InvitePage = () => {
                         {/*    RSVP    */}
                         <section>
                             <div className={`p-6 flex flex-col items-center gap-2`}>
-                                <div className={`text-3xl font-bold text-gold`} style={{fontFamily: 'Cinzel Bold'}}>RSVP
+                                <div className={`text-3xl font-bold text-gold cinzel-bold`}>RSVP
                                 </div>
                                 {(isAtdncLoading) && (
                                     <div className={`flex justify-center`}>
