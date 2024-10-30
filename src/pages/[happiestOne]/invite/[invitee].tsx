@@ -313,7 +313,7 @@ const InvitePage = () => {
     }
 
     const bgs = [bgImage1.src, bgImage2.src, bgImage3.src];
-    const [index, setIndex] = useState(0);
+
 
     // useEffect(() => {
     //     const interval = setInterval(() => {
@@ -321,7 +321,11 @@ const InvitePage = () => {
     //     }, 3000);
     // }, [index]);
 
-    const gruppedGalleries = groupIntoPairs(galleries);
+    const viewOptions: number[] = [5, 10, 15, 20, 25];
+    const [index, setIndex] = useState(0);
+    const [currentView, setCurrentView] = useState<number>(viewOptions[index]);
+    let gruppedGalleries = groupIntoPairs(galleries).slice(0,currentView);
+    const [viewLabel, setViewLabel] = useState<string>(`See More`)
 
     return (
         <>
@@ -551,8 +555,19 @@ const InvitePage = () => {
                                 <div><img src={OR6.src} className={'auto'}/></div>
                                 <div><img src={OR7.src}/></div>
                                 <div
+                                    onClick={() => {
+                                        if ((index+1)>=viewOptions.length) {
+                                            setViewLabel(`See Less`);
+                                            setIndex(0)
+                                        } else {
+                                            setViewLabel(`See More`);
+                                            setIndex((x) =>(x+1));
+                                        }
+                                        setCurrentView(viewOptions[index]);
+                                        gruppedGalleries = groupIntoPairs(galleries).slice(0,currentView);
+                                    }}
                                     className={`text-sm font-bold text-brown text-center py-1 px-3 rounded-lg cursor-pointer`}
-                                    style={{border: `1px solid #5a400f`}}>See More
+                                    style={{border: `1px solid #5a400f`}}>{viewLabel}
                                 </div>
                                 <div><img src={OR5.src}/></div>
                                 <div><img src={OR6.src} className={'auto'}/></div>
