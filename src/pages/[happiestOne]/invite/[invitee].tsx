@@ -397,7 +397,7 @@ const InvitePage = () => {
                     }}>
 
                         <section className={`px-3 items-center mt-10 mb-10 flex flex-col relative`}>
-                            <Image className={'absolute -top-10'} src={OR8.src} width={100} height={20} alt={'gutter'}
+                            <Image className={'absolute -top-6'} src={OR8.src} width={100} height={20} alt={'gutter'}
                                    style={{width: '80%'}}/>
                             <div className={`cinzel-bold text-gold text-3xl mt-32`}>Salam Sejahtera</div>
                         </section>
@@ -519,7 +519,7 @@ const InvitePage = () => {
                                 <div><img src={OR6.src} className={'auto'}/></div>
                                 <div><img src={OR7.src}/></div>
                                 <div
-                                    className={`text-4xl font-bold text-gold italianno w-full text-center -mx-4`}>Memorizing
+                                    className={`text-4xl text-gold italianno w-full text-center -mx-4`}>Memorizing
                                     Our Moments
                                 </div>
                                 <div><img src={OR5.src}/></div>
