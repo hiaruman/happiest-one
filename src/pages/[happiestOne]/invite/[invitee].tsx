@@ -368,12 +368,12 @@ const InvitePage = () => {
                     <div className={`absolute bottom-16 left-6 cursor-pointer`} onClick={() => {
                         toggleAudio();
                     }}>
-                        <div className={'w-12 h-12'}>
+                        <div className={'w-10 h-10'}>
                             <audio ref={audioRef} src={`/audio/song1.mp3`}/>
-                            <Image className={`absolute bottom-0 left-0 z-10`} src={turntable.src} width={48}
-                                   height={48} style={{width: `48px`, height: `48px`}} alt={'Turntable'}/>
-                            <Image id={`vinyl`} style={{transform: `rotate(${rad}deg)`, width: `48px`, height: `48px`}} src={vinyl.src} width={48}
-                                   height={48} alt={'Vinyl'}/>
+                            <Image className={`absolute bottom-0 left-0 z-10`} src={turntable.src} width={40}
+                                   height={40} style={{width: `40px`, height: `40px`}} alt={'Turntable'}/>
+                            <Image id={`vinyl`} style={{transform: `rotate(${rad}deg)`, width: `40px`, height: `40px`}} src={vinyl.src} width={40}
+                                   height={40} alt={'Vinyl'}/>
                         </div>
                     </div>
                     <div className={`mobile text-brown`} style={{
