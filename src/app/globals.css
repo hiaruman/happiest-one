@@ -160,6 +160,37 @@ body {
   .flash-message {
     @apply fixed z-30 text-green-700 bottom-[4.5rem] flex items-center right-6 min-h-8 min-w-44 bg-white rounded border-l-8 border-green-700;
   }
+
+  .cover {
+    visibility: visible;
+    opacity: 1;
+    transition: visibility 3s ease-in-out, opacity 3s ease-in;
+  }
+
+  .cover.opened {
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  .top-cover {
+    transform-origin: top center;
+    transform: rotateX(0);
+    transition: transform 2s ease-in-out;
+  }
+
+  .top-cover.opened {
+    transform: rotateX(-90deg);
+  }
+
+  .bottom-cover {
+    transform-origin: bottom center;
+    transform: rotateX(0);
+    transition: transform 2s ease-in-out;
+  }
+
+  .bottom-cover.opened {
+    transform: rotateX(90deg);
+  }
 }
 
 @keyframes rotate {

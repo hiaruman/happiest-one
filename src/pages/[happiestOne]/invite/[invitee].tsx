@@ -325,7 +325,9 @@ const InvitePage = () => {
     const [index, setIndex] = useState(0);
     const [currentView, setCurrentView] = useState<number>(viewOptions[index]);
     let gruppedGalleries = groupIntoPairs(galleries).slice(0,currentView);
-    const [viewLabel, setViewLabel] = useState<string>(`See More`)
+    const [viewLabel, setViewLabel] = useState<string>(`See More`);
+
+    const [isOpen, setOpen] = useState<boolean>(false);
 
     return (
         <>
@@ -377,6 +379,23 @@ const InvitePage = () => {
                 <div
                     className={`w-full max-w-[480px] absolute right-1/2 translate-x-1/2 min-[968px]:right-0 min-[968px]:translate-x-0`}
                     style={{height: '100vh'}}>
+
+                    {/*       COVER       */}
+                    <div className={`top-cover ${isOpen ? 'opened' : ''} absolute z-[103] text-gold top-0 w-full bg-alabaster rounded-b-3xl shadow-lg flex flex-col gap-6 items-center justify-end p-6`} style={{height: `calc(50vh + 6rem)`}}>
+                        <div>Kepada yang kami hormati Bapak/Ibu/Saudara/i</div>
+                        <div>{invitee}</div>
+                        <button
+                            onClick={() => {
+                                setOpen(true);
+                                toggleAudio();
+                            }}
+                            className={`text-gold rounded-lg py-2 px-4 hover:bg-gold hover:text-alabaster`} style={{border : `1px solid #d2a339`}}>
+                            Buka Undangan
+                        </button>
+                    </div>
+                    <div className={`bottom-cover ${isOpen ? 'opened' : ''} absolute z-[102] bottom-0 w-full bg-alabaster rounded-t-3xl`} style={{height: `calc(50vh + 6rem)`}}></div>
+                    {/*   END of COVER    */}
+
                     <div className={`${flashMessage ? 'flash-message' : 'hidden'}`}><span className={`p-2`}
                                                                                           onClick={() => {
                                                                                               setFlashMessage('');
@@ -461,7 +480,7 @@ const InvitePage = () => {
                             <div className={`text-center`}>Yang akan diselenggarakan pada hari</div>
                             <div className={'flex gap-2 items-center cinzel-bold text-gold'}>
                                 <div className={'w-full flex justify-center text-3xl'}>MINGGU</div>
-                                <div className={'w-full flex justify-center text-4xl font-bold border-gold border-l-2 border-r-2'}>24</div>
+                                <div className={'px-3 flex justify-center text-4xl font-bold border-gold border-l-2 border-r-2'}>24</div>
                                 <div className={'w-full flex flex-col items-center text-sm'}>
                                     <div>NOVEMBER</div>
                                     <div>2024</div>
