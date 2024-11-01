@@ -494,7 +494,7 @@ const InvitePage = () => {
                                        alt={'The Groom'}/>
                             </div>
                             <div className={`flex flex-col items-center gap-2`}>
-                                <div className={`cormorant-infant font-bold text-gold text-3xl text-center`}>Dr. (cand.) Yohanes
+                                <div className={`cormorant-infant font-bold text-gold text-3xl text-center`}>Dr. (cand). Yohanes
                                     Osa Hamara, S.H., M.H.
                                 </div>
                                 <div className={`text-center`}>Putra pertama dari Bapak Antonius Rio Tripurboyo & Ibu
