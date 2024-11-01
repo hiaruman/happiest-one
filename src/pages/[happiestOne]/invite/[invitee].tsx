@@ -20,6 +20,7 @@ import OR7 from "@/assets/svg/OR7.svg";
 import OR8 from "@/assets/svg/OR8.svg";
 import OR9 from "@/assets/svg/OR9.svg";
 import OR10 from "@/assets/svg/OR10.svg";
+import OR11 from "@/assets/svg/OR11.svg";
 import turntable from "@/assets/svg/turntable.svg";
 import vinyl from "@/assets/svg/vinyl.svg";
 import arrowLeft from "@/assets/svg/arrow-left.svg";
@@ -45,6 +46,10 @@ const InvitePage = () => {
     if (happiestOne && !['osa-yosi', 'osayosi', 'yosi-osa', 'yosiosa'].includes(happiestOne.toLowerCase())) {
         router.push('/');
     }
+
+
+
+
 
     const presences = [{
         label: 'Konfirmasi Kehadiran',
@@ -76,6 +81,7 @@ const InvitePage = () => {
     const nameRef = useRef<HTMLInputElement>(null);
     const noteRef = useRef<HTMLTextAreaElement>(null);
 
+    const [inviteeLabel, setInviteeLabel] = useState<string>('');
     useEffect(() => {
 
         const fetchAttendance = async (invitee:string) => {
@@ -113,6 +119,10 @@ const InvitePage = () => {
                 setGreetLoading(false);
             }
         };
+
+        if (invitee) {
+            setInviteeLabel(invitee.split('+').map((x) =>(x[0].toUpperCase() + x.substring(1))).join(' '));
+        }
 
         invitee && fetchAttendance(invitee);
         invitee && fetchGreetings();
@@ -391,15 +401,15 @@ const InvitePage = () => {
                         <div className={`absolute z-20 top-0 left-0 w-full h-full flex flex-col gap-3 justify-end items-center px-6 py-12`}>
                             <div>The Wedding of</div>
                             <div className={`embossed-gold-text flex gap-2 items-baseline`}>
-                                <span className={`cinzel-bold text-3xl`}>Yosi</span>
-                                <span className={`playfair-display text-4xl`}>&</span>
-                                <span className={`cinzel-bold text-3xl`}>Osa</span>
+                                <span className={`cinzel-bold text-4xl`}>Yosi</span>
+                                <span className={`playfair-display text-5xl`}>&</span>
+                                <span className={`cinzel-bold text-4xl`}>Osa</span>
                             </div>
-                            <div className={`text-4xl playfair-display flex items-center mb-8`}>
-                                24&#183;11&#183;24
+                            <div className={`text-2xl flex items-baseline gap-2 mb-8`}>
+                                24<span className={`text-sm`}>&#9679;</span>11<span className={`text-sm`}>&#9679;</span>24
                             </div>
                             <div>Kepada yang kami hormati Bapak/Ibu/Saudara/i</div>
-                            <div>{invitee}</div>
+                            <div className={`text-lg text-center min-h-20 flex items-center max-w-72`}>{inviteeLabel}</div>
                             <button
                                 onClick={() => {
                                     setOpen(true);
@@ -410,7 +420,23 @@ const InvitePage = () => {
                             </button>
                         </div>
                     </div>
-                    <div className={`bottom-cover ${isOpen ? 'opened' : ''} absolute z-[102] bottom-0 w-full bg-yankblue rounded-t-3xl`} style={{height: `calc(50vh + 6rem)`}}></div>
+                    <div
+                        className={`bottom-cover ${isOpen ? 'opened' : ''} absolute z-[102] bottom-0 w-full bg-yankblue rounded-t-3xl`}
+                        style={{height: `calc(50vh + 6rem)`}}>
+                        <div>
+                            <Image className={'absolute top-0 left-0'} src={OR9.src} width={100} height={20}
+                                   alt={'Top Ornament'} style={{width: `100%`, height: `auto`}}/>
+                            <Image className={'absolute bottom-32 right-1/2 translate-x-1/2'} src={OR11.src} width={100} height={20}
+                                   alt={'Bottom Ornament'} style={{width: `200px`, height: `auto`}}/>
+                            <Image className={'absolute bottom-2 left-0'} src={OR10.src} width={100} height={20}
+                                   alt={'Bottom Ornament'} style={{width: `100%`, height: `auto`}}/>
+                            <div className={`cinzel-bold text-gold absolute bottom-48 right-1/2 translate-x-1/2 flex gap-2 items-baseline text-4xl`}>
+                                <span>Y</span>
+                                <span className={`playfair-display`}>&</span>
+                                <span>O</span>
+                            </div>
+                        </div>
+                    </div>
                     {/*   END of COVER    */}
 
                     <div className={`${flashMessage ? 'flash-message' : 'hidden'}`}><span className={`p-2`}
@@ -456,7 +482,7 @@ const InvitePage = () => {
                                        alt={'The Bride'}/>
                             </div>
                             <div className={`flex items-center flex-col gap-2`}>
-                                <div className={`ephesis font-bold text-center text-gold text-3xl`}>Yosiana Dwi Saputri,
+                                <div className={`cormorant-infant font-bold text-center text-gold text-3xl`}>Yosiana Dwi Saputri,
                                     A.Md.Farm
                                 </div>
                                 <div>Putri kedua dari Bapak Priyoko & Ibu Sri Esti Rahayu</div>
@@ -468,7 +494,7 @@ const InvitePage = () => {
                                        alt={'The Groom'}/>
                             </div>
                             <div className={`flex flex-col items-center gap-2`}>
-                                <div className={`ephesis font-bold text-gold text-3xl text-center`}>Dr (cand) Yohanes
+                                <div className={`cormorant-infant font-bold text-gold text-3xl text-center`}>Dr. (cand.) Yohanes
                                     Osa Hamara, S.H., M.H.
                                 </div>
                                 <div className={`text-center`}>Putra pertama dari Bapak Antonius Rio Tripurboyo & Ibu
@@ -517,8 +543,7 @@ const InvitePage = () => {
                                     <div className={`flex flex-col items-center gap-4`}>
                                         <div className={`cinzel-bold text-xl text-center text-gold`}>RESEPSI</div>
                                         <div className={`text-center`}>18.00 WIB s.d. 21.00 WIB</div>
-                                        <div className={`text-center`}>Convention Hall Putra Sang Fajar <br/>(Pintu Timur
-                                            depan gedung DPRD Kabupaten Banyumas)<br/>
+                                        <div className={`text-center`}>Convention Hall Putra Sang Fajar <br/>
                                             Komplek Menara Teratai Purwokerto
                                         </div>
                                     </div>
@@ -744,18 +769,15 @@ const InvitePage = () => {
                                 ditujukan ke alamat berikut
                             </div>
                             <div className={`flex flex-col gap-4 items-center`}>
-                                <div className={`font-bold`}>Kantor Hukum Hamara & Partners</div>
+                                <div className={`font-bold`}>Kediaman Mempelai Wanita</div>
 
                                 <div className={`flex items-center`}>
                                     <div className={`text-center w-full`}>
-                                        Kantor Hukum Hamara & Partners. Jl. Profesor Dr. Soeharso (samping mie ayam
-                                        tunggal
-                                        rasa), Glempang, Bancarkembar, Kec. Purwokerto Utara, Kab. Banyumas, Jawa Tengah
-                                        53114
+                                        Kradenan Wetan RT 07 RW 07 (Rumah warna hijau, sebrang Bank Surya Yudha Sumbang), Desa Banteran, Kecamatan Sumbang, Kabupaten Banyumas, Provinsi Jawa Tengah. Kode Pos 53183.
                                     </div>
                                     <div onClick={(e) => {
                                         copyText(e,
-                                            `Kantor Hukum Hamara & Partners. Jl. Profesor Dr. Soeharso (samping mie ayam tunggal rasa), Glempang, Bancarkembar, Kec. Purwokerto Utara, Kab. Banyumas, Jawa Tengah 53114`
+                                            `Kradenan Wetan RT 07 RW 07 (Rumah warna hijau, sebrang Bank Surya Yudha Sumbang), Desa Banteran, Kecamatan Sumbang, Kabupaten Banyumas, Provinsi Jawa Tengah. Kode Pos 53183.`
                                         )
                                     }} className={`cursor-pointer ml-2 w-12`} title={`Salin`}>
                                         <img src={iconCopy.src} className={`h-4`} alt={`copy`}/>

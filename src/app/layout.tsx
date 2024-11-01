@@ -35,6 +35,9 @@ export default function RootLayout({
             <link href="https://fonts.cdnfonts.com/css/monsieur-la-doulaise" rel="stylesheet"/>
             <link href="https://fonts.cdnfonts.com/css/passions-conflict" rel="stylesheet"/>
             <link href="https://fonts.cdnfonts.com/css/ruthie" rel="stylesheet"/>
+            <link href="https://fonts.cdnfonts.com/css/crimson-pro" rel="stylesheet"/>
+            <link href="https://fonts.cdnfonts.com/css/cormorant-infant" rel="stylesheet"/>
+            <link href="https://fonts.cdnfonts.com/css/lexend-deca" rel="stylesheet"/>
         </head>
         <body className={`antialiased`}>
         {children}
