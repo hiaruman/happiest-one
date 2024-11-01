@@ -773,7 +773,7 @@ const InvitePage = () => {
 
                                 <div className={`flex items-center`}>
                                     <div className={`text-center w-full`}>
-                                        Kradenan Wetan RT 07 RW 07 (Rumah warna hijau, sebrang Bank Surya Yudha Sumbang), Desa Banteran, Kecamatan Sumbang, Kabupaten Banyumas, Provinsi Jawa Tengah. Kode Pos 53183.
+                                        Kradenan Wetan RT 07 RW 07 (Rumah warna hijau, seberang Bank Surya Yudha Sumbang), Desa Banteran, Kecamatan Sumbang, Kabupaten Banyumas, Provinsi Jawa Tengah. Kode Pos 53183.
                                     </div>
                                     <div onClick={(e) => {
                                         copyText(e,
