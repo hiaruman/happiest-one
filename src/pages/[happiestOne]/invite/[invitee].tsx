@@ -333,7 +333,7 @@ const InvitePage = () => {
     //     }, 3000);
     // }, [index]);
 
-    const viewOptions: number[] = [5, 10, 15, 20, 25];
+    const viewOptions: number[] = [5, 10, 15, 20, 25, 30, 35];
     const [index, setIndex] = useState(0);
     const [currentView, setCurrentView] = useState<number>(viewOptions[index]);
     let gruppedGalleries = groupIntoPairs(galleries).slice(0,currentView);
