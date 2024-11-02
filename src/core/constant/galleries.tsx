@@ -95,7 +95,7 @@ export const galleries = [
     { order:19, path: image07.src, module: image07},
 
     { order:20, path: image27.src, module: image27},
-    { order:11, path: image18.src, module: image18},
+    { order:21, path: image18.src, module: image18},
     { order:22, path: image19.src, module: image19},
     { order:23, path: image34.src, module: image34},
     { order:24, path: image02.src, module: image02},
