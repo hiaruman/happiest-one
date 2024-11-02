@@ -733,11 +733,9 @@ const InvitePage = () => {
                         </section>
 
                         <section id={'gift'} className={`pt-10 px-6 flex flex-col gap-10 items-center`}>
-                            <div className={`text-3xl font-bold text-gold`} style={{fontFamily: 'Cinzel Bold'}}>Hadiah
+                            <div className={`text-3xl font-bold text-gold`} style={{fontFamily: 'Cinzel Bold'}}>Dompet Digital
                             </div>
-                            <div className={`text-center`}>Bagi bapak/ibu/saudara/i yang ingin mengirimkan hadiah
-                                pernikahan
-                                dapat melalui nomor rekening yang tertera di bawah
+                            <div className={`text-center`}>Bagi bapak/ibu/saudara/i yang ingin mengirimkan hadiah pernikahan dapat melalui nomor rekening yang tertera di bawah
                             </div>
                             <div className={`flex flex-col gap-2 items-center`}>
                                 <div>
@@ -763,6 +761,8 @@ const InvitePage = () => {
                                                                                           className={`h-4`}
                                                                                           alt={`copy`}/></span></div>
                             </div>
+
+                            <div className={`text-3xl font-bold text-gold`} style={{fontFamily: 'Cinzel Bold'}}>Hadiah</div>
                             <div className={'text-center w-full'}>
                                 atau bagi bapak/ibu/saudara/i yang ingin mengirimkan hadiah pernikahan berupa fisik
                                 dapat
@@ -773,7 +773,9 @@ const InvitePage = () => {
 
                                 <div className={`flex items-center`}>
                                     <div className={`text-center w-full`}>
-                                        Kradenan Wetan RT 07 RW 07 (Rumah warna hijau, seberang Bank Surya Yudha Sumbang), Desa Banteran, Kecamatan Sumbang, Kabupaten Banyumas, Provinsi Jawa Tengah. Kode Pos 53183.
+                                        Kradenan Wetan RT 07 RW 07 (Rumah warna hijau, seberang Bank Surya Yudha
+                                        Sumbang), Desa Banteran, Kecamatan Sumbang, Kabupaten Banyumas, Provinsi Jawa
+                                        Tengah. Kode Pos 53183.
                                     </div>
                                     <div onClick={(e) => {
                                         copyText(e,
@@ -787,7 +789,7 @@ const InvitePage = () => {
                         </section>
 
                         <section className={`px-3 items-center my-10 flex flex-col`}>
-                            <Image src={OR3.src} width={100} height={20} alt={'gutter'} style={{width: '100%'}}/>
+                        <Image src={OR3.src} width={100} height={20} alt={'gutter'} style={{width: '100%'}}/>
                         </section>
 
                         <section id={`closing`} className={`px-6`}>
