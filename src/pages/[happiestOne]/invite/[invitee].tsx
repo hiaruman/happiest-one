@@ -121,7 +121,9 @@ const InvitePage = () => {
         };
 
         if (invitee) {
-            setInviteeLabel(invitee.split('+').map((x) =>(x[0].toUpperCase() + x.substring(1))).join(' '));
+            const iL: string = invitee.split('+').map((x) =>(x[0].toUpperCase() + x.substring(1))).join(' ');
+            setInviteeLabel(iL);
+            nameRef.current ? (nameRef.current as any).value = iL : '';
         }
 
         invitee && fetchAttendance(invitee);
