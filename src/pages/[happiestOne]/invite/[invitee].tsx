@@ -70,7 +70,7 @@ const InvitePage = () => {
     const [isAtdncLoading, setAtdncLoading] = useState(true);
     const [attendanceId, setAttendanceId] = useState();
     const [greetings, setGreetings] = useState([]);
-    const [isGreetLoading, setGreetLoading] = useState(true);
+    const [isGreetLoading, setGreetLoading] = useState(false);
 
     // State untuk menyimpan data form
     const [presence, setPresence] = useState(selectedPresence.value);
@@ -211,6 +211,7 @@ const InvitePage = () => {
             note
         };
         try {
+            setGreetLoading(true);
             // Mengirim data ke API handler menggunakan fetch
             const response = await fetch(`/api/greetings`, {
                 method: 'POST',
@@ -232,6 +233,7 @@ const InvitePage = () => {
                         setGreetings(data.data);
                         const msg: string = 'Berhasil mengirim pesan';
                         showflashMessage(msg);
+                        setGreetLoading(false);
                         setTimeout(() => {
                             const messageBox: HTMLElement | null = document.getElementById('message-box');
                             if (messageBox) messageBox.scrollTop = messageBox.scrollHeight + 48;
@@ -239,13 +241,16 @@ const InvitePage = () => {
                     }
                 } catch (error) {
                     console.error("Failed to fetch greetings:", error);
+                    setGreetLoading(false);
                 } finally {
                     setGreetLoading(false);
                 }
             } else {
+                setGreetLoading(false);
                 setMessage('Failed to add greetings');
             }
         } catch (error) {
+            setGreetLoading(false);
             console.error('Error submitting greetings:', error);
             setMessage('An error occurred');
         }
@@ -709,25 +714,32 @@ const InvitePage = () => {
                                                     style={{outline: 'transparent'}}
                                                 />
                                             </div>
-                                            <div className={`mt-2 flex`}>
-                                                <textarea rows={1}
-                                                          className={`bg-alabaster w-full text-xs rounded-l pl-3 py-2`}
-                                                          ref={noteRef}
-                                                          placeholder={`Pesan`}
-                                                          style={{
-                                                              resize: 'none',
-                                                              outline: 'transparent'
-                                                          }}></textarea>
-                                                <div
-                                                    className={`rounded-r bg-alabaster p-2 flex justify-end items-center`}>
-                                                    <button type={`submit`}
-                                                            className={`rounded-full bg-gold w-8 h-8 text-chiblack hover:bg-amber-500`}>
-                                                        <Image className={`ms-1`} height={24} width={24}
-                                                               src={iconUp.src}
-                                                               alt={`icon-up`}/>
-                                                    </button>
+                                            {(isGreetLoading) && (
+                                                <div className={`flex justify-center`}>
+                                                    <SvgSpinners180Ring/>
                                                 </div>
-                                            </div>
+                                            )}
+                                            {(!isGreetLoading) && (
+                                                <div className={`mt-2 flex`}>
+                                                    <textarea rows={1}
+                                                              className={`bg-alabaster w-full text-xs rounded-l pl-3 py-2`}
+                                                              ref={noteRef}
+                                                              placeholder={`Pesan`}
+                                                              style={{
+                                                                  resize: 'none',
+                                                                  outline: 'transparent'
+                                                              }}></textarea>
+                                                    <div
+                                                        className={`rounded-r bg-alabaster p-2 flex justify-end items-center`}>
+                                                        <button type={`submit`}
+                                                                className={`rounded-full bg-gold w-8 h-8 text-chiblack hover:bg-amber-500`}>
+                                                            <Image className={`ms-1`} height={24} width={24}
+                                                                   src={iconUp.src}
+                                                                   alt={`icon-up`}/>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            )}
                                         </form>
                                     </div>
                                 </div>
