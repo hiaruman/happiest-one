@@ -715,7 +715,7 @@ const InvitePage = () => {
                                                 />
                                             </div>
                                             {(isGreetLoading) && (
-                                                <div className={`flex justify-center`}>
+                                                <div className={`flex justify-center mt-2`}>
                                                     <SvgSpinners180Ring/>
                                                 </div>
                                             )}
