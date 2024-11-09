@@ -121,7 +121,22 @@ const InvitePage = () => {
         };
 
         if (invitee) {
-            const iL: string = invitee.split('+').map((x) =>(x[0].toUpperCase() + x.substring(1))).join(' ');
+            const il : string[] = invitee.split('+');
+            if (il.length>1) {
+                il.map((x) =>{
+                    if (!['dr.', 'dr'].includes(x)) {
+                        x = x[0].toUpperCase() + x.substring(1)
+                    }
+                    return x;
+                })
+            }
+            const iL = il.join(' ').split(' ').map((x) =>{
+                if (!['dr.', 'dr'].includes(x)) {
+                    console.log('X ==> ', x);
+                    x = x[0].toUpperCase() + x.substring(1)
+                }
+                return x;
+            }).join(' ');
             setInviteeLabel(iL);
             nameRef.current ? (nameRef.current as any).value = iL : '';
         }
