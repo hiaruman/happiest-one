@@ -222,7 +222,7 @@ const InvitePage = () => {
 
             if (response.ok) {
                 const result = await response.json();
-                nameRef.current ? (nameRef.current as any).value = '' : '';
+                // nameRef.current ? (nameRef.current as any).value = '' : '';
                 noteRef.current ? (noteRef.current as any).value = '' : '';
                 setMessage('Greetings successfully updated');
                 try {
