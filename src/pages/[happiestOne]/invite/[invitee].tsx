@@ -46,6 +46,13 @@ const InvitePage = () => {
     if (happiestOne && !['osa-yosi', 'osayosi', 'yosi-osa', 'yosiosa'].includes(happiestOne.toLowerCase())) {
         router.push('/');
     }
+    useEffect(() => {
+        if(happiestOne && ['yosi-osa', 'yosiosa'].includes(happiestOne.toLowerCase())) {
+            setGroomName('Dr. (cand). Yohanes Osa Hamara, S.H., M.H.');
+        } else if (happiestOne && ['osa-yosi', 'osayosi'].includes(happiestOne.toLowerCase())) {
+            setGroomName('Advokat Yohanes Osa Hamara, S.H., M.H.');
+        }
+    }, [happiestOne]);
 
 
 
@@ -82,6 +89,7 @@ const InvitePage = () => {
     const noteRef = useRef<HTMLTextAreaElement>(null);
 
     const [inviteeLabel, setInviteeLabel] = useState<string>('');
+    const [groomName, setGroomName] = useState('Yohanes Osa Hamara')
     useEffect(() => {
 
         const fetchAttendance = async (invitee:string) => {
@@ -516,9 +524,7 @@ const InvitePage = () => {
                                        alt={'The Groom'}/>
                             </div>
                             <div className={`flex flex-col items-center gap-2`}>
-                                <div className={`cormorant-infant font-bold text-gold text-3xl text-center`}>Dr. (cand). Yohanes
-                                    Osa Hamara, S.H., M.H.
-                                </div>
+                                <div className={`cormorant-infant font-bold text-gold text-3xl text-center`}>{groomName}</div>
                                 <div className={`text-center`}>Putra pertama dari Bapak Antonius Rio Tripurboyo & Ibu
                                     Nur Endah Sumiati (Menuk)
                                 </div>
